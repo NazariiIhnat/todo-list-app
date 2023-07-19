@@ -16,6 +16,7 @@ export interface AuthData {
 export class AuthService {
   private apiKey = 'AIzaSyCVR0Mmc344Kn728ll183aV7UjsZmxLwJI';
   user = new Subject<User>();
+  isLoggedIn = false;
 
   constructor(private http: HttpClient) {}
 
@@ -42,6 +43,11 @@ export class AuthService {
           returnSecureToken: true,
         }
       )
-      .pipe(tap((res) => this.user.next(new User(res.email, res.localId))));
+      .pipe(
+        tap((res) => {
+          this.user.next(new User(res.email, res.localId));
+          this.isLoggedIn = true;
+        })
+      );
   }
 }

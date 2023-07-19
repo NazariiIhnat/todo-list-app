@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TaskListComponent } from './task-list/task-list.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent],
+  declarations: [AppComponent, AuthComponent, TaskListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

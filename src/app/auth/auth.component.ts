@@ -10,8 +10,6 @@ import { User } from './user.model';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
-  subscription: Subscription;
-
   constructor(private authService: AuthService) {}
 
   onLogin(form: NgForm) {

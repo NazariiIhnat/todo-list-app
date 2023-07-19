@@ -65,3 +65,11 @@ button:hover {
   cursor: pointer;
   background-color: #403866;
 }
+
+.error-msg {
+  font-family: "Ubuntu", sans-serif;
+  color: #673030;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-top: 16px;
+}

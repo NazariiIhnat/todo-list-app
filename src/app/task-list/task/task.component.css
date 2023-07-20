@@ -32,6 +32,23 @@
   height: 70px;
   white-space: normal;
   margin-top: 0.45rem;
+  overflow-y: scroll;
+}
+
+.description::-webkit-scrollbar {
+  width: 3px;
+}
+
+.description::-webkit-scrollbar-track {
+  background: rgb(252, 252, 252);
+}
+
+.description::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+.description::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .date-container {

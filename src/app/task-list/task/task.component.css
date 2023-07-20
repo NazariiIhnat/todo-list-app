@@ -2,6 +2,23 @@
   background-color: rgb(252, 252, 252);
   border-radius: 10px;
   max-width: 15rem;
+  position: relative;
+  transform: translateY(100%);
+}
+
+.container::before {
+  display: block;
+  content: "Category";
+  background-color: rgb(255, 253, 116);
+  width: fit-content;
+  padding: 0.5rem 0.5rem 0.3rem 0.5rem;
+  font-weight: 500;
+  font-size: 0.8rem;
+  position: absolute;
+  left: 61%;
+  transform: translateY(-100%);
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
 
 .inner-container {
@@ -90,7 +107,7 @@ button {
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .btn-uncompleted {

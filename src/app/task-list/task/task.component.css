@@ -3,7 +3,6 @@
   border-radius: 10px;
   max-width: 15rem;
   position: relative;
-  transform: translateY(100%);
 }
 
 .container::before {

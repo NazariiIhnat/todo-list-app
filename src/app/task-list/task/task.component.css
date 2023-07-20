@@ -1,0 +1,102 @@
+.container {
+  background-color: rgb(252, 252, 252);
+  border-radius: 10px;
+  max-width: 15rem;
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+  padding: 1rem;
+  font-size: 0.75rem;
+  line-height: 1.1rem;
+}
+
+.text-overflow {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.title {
+  font-weight: 700;
+  width: 100%;
+}
+
+.description {
+  color: #9a9a9a;
+  font-weight: 500;
+  height: 70px;
+  white-space: normal;
+  margin-top: 0.45rem;
+}
+
+.date-container {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.icon {
+  width: 1.1rem;
+  stroke: #565454;
+}
+
+.icon-fill {
+  fill: #565454;
+}
+
+.date {
+  color: #565454;
+  transform: translateY(1px);
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1.5px dashed #9a9a9a;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 0.3rem 0.7rem;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.8rem;
+  border: none;
+  transition: all 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.btn-uncompleted {
+  background-color: #ffc19f;
+  color: #673030;
+}
+
+.btn-completed {
+  background-color: #a9febd;
+  color: #587240;
+}
+
+.action-icons-container {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.action-icons-container .icon {
+  width: 1.2rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.action-icons-container .icon:hover {
+  transform: scale(1.2);
+}

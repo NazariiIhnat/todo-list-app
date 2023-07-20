@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   errorMessage: string;
 
@@ -17,6 +18,7 @@ export class AuthComponent {
     this.authService.login(email, password).subscribe(
       (res) => {
         this.errorMessage = null;
+        this, this.router.navigate(['all']);
       },
       (error) => (this.errorMessage = error.message)
     );

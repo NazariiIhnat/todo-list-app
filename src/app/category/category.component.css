@@ -1,0 +1,96 @@
+section {
+  max-width: 15%;
+  height: 100vh;
+  background-color: #fcfcfc;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  cursor: pointer;
+  padding: 1rem 0;
+  transition: all 0.2s;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+li:hover {
+  color: #827ffe;
+}
+
+a {
+  font-weight: 500;
+  padding: 1.2rem;
+}
+
+.selected {
+  background-color: #e0e0e0;
+  border-right: 5px solid #827ffe;
+}
+
+.btn-new {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-new:hover {
+  color: #827ffe;
+}
+
+.new-category-container {
+  padding: 0.5rem 1.2rem;
+}
+
+.input-container {
+  background-color: #e6e6e6;
+  border-radius: 3px;
+  margin-bottom: 16px;
+}
+
+input {
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Ubuntu", sans-serif;
+  color: #403866;
+  display: block;
+  background: 0 0;
+  border: none;
+  width: 100%;
+  padding: 0.6rem 0.6rem;
+  color: rgb(56, 55, 55);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.btn {
+  width: 50%;
+  border: none;
+  padding: 0.3rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-ok {
+  background-color: #8eff97;
+}
+
+.btn-cancel {
+  background-color: #ff8282;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}

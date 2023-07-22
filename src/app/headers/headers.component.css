@@ -1,0 +1,56 @@
+.inner-container {
+  padding: 1.7rem;
+}
+
+.top-headers {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+input {
+  padding: 0.5rem 0.4rem;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.btn-logout {
+  padding: 0.7rem 0.6rem;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Ubuntu", sans-serif;
+  border: none;
+  cursor: pointer;
+  background-color: #ff8282;
+}
+
+.title {
+  margin-top: 1.7rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.bottom-headers {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-add {
+  padding: 0.8rem 0.7rem;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Ubuntu", sans-serif;
+  border: none;
+  cursor: pointer;
+  background-color: #827ffe;
+}
+
+select {
+  font-size: 1rem;
+  padding: 0.8rem 0.7rem;
+  font-family: "Ubuntu", sans-serif;
+  cursor: pointer;
+}

@@ -32,6 +32,7 @@
           [disabled]="form.invalid"
           [style.opacity]="form.valid ? 1 : 0.5"
           [ngStyle]="form.invalid ? { opacity: 0.5, cursor: 'default' } : {}"
+          (click)="onSaveCategory(form)"
         >
           &#10004;
         </button>

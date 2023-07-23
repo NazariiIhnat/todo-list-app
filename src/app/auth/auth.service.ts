@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Subject, throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
 
@@ -16,7 +16,7 @@ export interface AuthData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiKey = 'AIzaSyCVR0Mmc344Kn728ll183aV7UjsZmxLwJI';
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
   isLoggedIn = false;
 
   constructor(private http: HttpClient) {}
@@ -49,7 +49,7 @@ export class AuthService {
       .pipe(
         catchError(this.handleLoginErrors),
         tap((res) => {
-          this.user.next(new User(res.email, res.localId));
+          this.user.next(new User(res.email, res.localId, res.idToken));
           this.isLoggedIn = true;
         })
       );

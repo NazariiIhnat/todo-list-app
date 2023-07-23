@@ -1,13 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { CategoryService } from './category.service';
+import { AuthService } from '../auth/auth.service';
+import { Category } from './category.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
-export class CategoryComponent {
+export class CategoryComponent implements OnInit {
   isShownNewCategoryContainer = false;
+  private subscription = new Subscription();
+
+  constructor(
+    private categoryService: CategoryService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.categoryService.fetch().subscribe((val) => {
+      if (!val) return;
+      Object.values(val).map((key) => {
+        this.categoryItems.push({ name: key.name, isSelected: false });
+      });
+    });
+    this.subscription = this.categoryService.newCategory.subscribe();
+  }
 
   categoryItems = [
     {
@@ -39,5 +59,11 @@ export class CategoryComponent {
 
   onCloseCategoryForm() {
     this.isShownNewCategoryContainer = false;
+  }
+
+  onSaveCategory(form: NgForm) {
+    const name = form.controls['categoryName'].value;
+    const userID = this.authService.user.value.id;
+    this.categoryService.save(new Category(name));
   }
 }

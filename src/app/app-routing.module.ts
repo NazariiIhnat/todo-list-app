@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
-import { TodoListComponent } from './todo-list/todo-list.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -12,7 +12,6 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'task', component: TodoListComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/auth', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,12 +1,9 @@
-section {
-  max-width: 15%;
-  height: 100vh;
-  background-color: #fcfcfc;
-}
-
 .container {
   display: flex;
   flex-direction: column;
+
+  background-color: #e0e0e0;
+  height: 100%;
 }
 
 ul {

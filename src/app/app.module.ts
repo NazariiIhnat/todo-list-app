@@ -8,9 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskComponent } from './task-list/task/task.component';
+import { CategoryComponent } from './category/category.component';
+import { HeadersComponent } from './headers/headers.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, TaskListComponent, TaskComponent],
+  declarations: [AppComponent, AuthComponent, TaskListComponent, TaskComponent, CategoryComponent, HeadersComponent, ModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

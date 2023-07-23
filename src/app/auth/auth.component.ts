@@ -18,7 +18,7 @@ export class AuthComponent {
     this.authService.login(email, password).subscribe(
       (res) => {
         this.errorMessage = null;
-        this, this.router.navigate(['all']);
+        this, this.router.navigate(['task']);
       },
       (error) => (this.errorMessage = error.message)
     );

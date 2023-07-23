@@ -11,9 +11,10 @@ import { TaskComponent } from './task-list/task/task.component';
 import { CategoryComponent } from './category/category.component';
 import { HeadersComponent } from './headers/headers.component';
 import { ModalComponent } from './modal/modal.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, TaskListComponent, TaskComponent, CategoryComponent, HeadersComponent, ModalComponent],
+  declarations: [AppComponent, AuthComponent, TaskListComponent, TaskComponent, CategoryComponent, HeadersComponent, ModalComponent, TodoListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

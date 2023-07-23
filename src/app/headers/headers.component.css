@@ -25,6 +25,12 @@ input {
   background-color: #ff8282;
 }
 
+.btn-logout:link,
+.btn-logout:visited {
+  text-decoration: none;
+  color: black;
+}
+
 .title {
   margin-top: 1.7rem;
   font-size: 1.8rem;

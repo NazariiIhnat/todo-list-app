@@ -96,4 +96,9 @@ export class AuthService {
       return new Error(errorMessage);
     });
   }
+
+  logout() {
+    this.user.next(null);
+    this.isLoggedIn = false;
+  }
 }

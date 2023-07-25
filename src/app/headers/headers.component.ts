@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -9,7 +9,13 @@ import { AuthService } from '../auth/auth.service';
 export class HeadersComponent {
   constructor(private authService: AuthService) {}
 
+  @Output() openModalEmitter = new EventEmitter<any>();
+
   onLogout() {
     this.authService.logout();
+  }
+
+  onOpenModal() {
+    this.openModalEmitter.emit();
   }
 }

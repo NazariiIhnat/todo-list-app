@@ -1,10 +1,12 @@
+<div class="modal-container" *ngIf="isOpenModal">
+  <app-modal (closeModalEmitter)="handleCloseModal($event)"></app-modal>
+</div>
 <div class="container">
   <aside>
     <app-category></app-category>
   </aside>
   <main>
-    <app-headers></app-headers>
+    <app-headers (openModalEmitter)="handleOpenModal($event)"></app-headers>
     <section><app-task-list></app-task-list></section>
   </main>
 </div>
-

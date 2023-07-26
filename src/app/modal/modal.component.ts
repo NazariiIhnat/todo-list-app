@@ -66,6 +66,6 @@ export class ModalComponent implements OnInit, OnDestroy {
       false
     );
     this.taskService.save(task);
-    // this.closeModalEmitter.next();
+    this.closeModalEmitter.next();
   }
 }

@@ -18,6 +18,21 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.sunscription = this.taskService.newTaskSubject.subscribe((task) =>
       this.tasks.push(task)
     );
+    this.taskService.fetch().subscribe((tasks) => {
+      if (!tasks) return;
+      Object.values(tasks).map((key) => {
+        this.tasks.push(
+          new Task(
+            key.title,
+            key.description,
+            key.date,
+            key.category,
+            key.isImportant,
+            key.isDone
+          )
+        );
+      });
+    });
   }
   ngOnDestroy(): void {
     this.sunscription.unsubscribe();

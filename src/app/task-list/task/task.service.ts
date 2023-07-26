@@ -12,8 +12,6 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   save(task: Task) {
-    console.log(task);
-
     this.http
       .post<Task>(this.apiUrl, {
         title: task.title,
@@ -26,5 +24,9 @@ export class TaskService {
       .subscribe(() => {
         this.newTaskSubject.next(task);
       });
+  }
+
+  fetch() {
+    return this.http.get<Task>(this.apiUrl);
   }
 }

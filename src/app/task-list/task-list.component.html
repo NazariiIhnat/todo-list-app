@@ -1,10 +1,5 @@
 <div class="container">
   <ul>
-    <li><app-task></app-task></li>
-    <li><app-task></app-task></li>
-    <li><app-task></app-task></li>
-    <li><app-task></app-task></li>
-    <li><app-task></app-task></li>
-    <li><app-task></app-task></li>
+    <li *ngFor="let task of tasks"><app-task [task]="task"></app-task></li>
   </ul>
 </div>

@@ -5,9 +5,7 @@
   position: relative;
 }
 
-.container::before {
-  display: block;
-  content: "Category";
+.category-container {
   background-color: rgb(255, 253, 116);
   width: fit-content;
   padding: 0.5rem 0.5rem 0.3rem 0.5rem;

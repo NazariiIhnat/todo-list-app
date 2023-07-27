@@ -21,12 +21,12 @@ export class TaskService {
         isImportant: task.isImportant,
         isDone: task.isDone,
       })
-      .subscribe(() => {
+      .subscribe((x) => {
         this.newTaskSubject.next(task);
       });
   }
 
   fetch() {
-    return this.http.get<Task>(this.apiUrl);
+    return this.http.get<{ string: { task: Task } }>(this.apiUrl);
   }
 }

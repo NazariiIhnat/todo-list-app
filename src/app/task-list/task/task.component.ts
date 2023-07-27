@@ -8,4 +8,5 @@ import { Task } from './task.model';
 })
 export class TaskComponent {
   @Input() task: Task;
+  @Input() id: string;
 }

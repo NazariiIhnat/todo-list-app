@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Task } from './task/task.model';
 import { Subscription } from 'rxjs';
 import { TaskService } from './task/task.service';
 
@@ -9,7 +8,7 @@ import { TaskService } from './task/task.service';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  tasks: Task[] = [];
+  tasks = [];
   private sunscription = new Subscription();
 
   constructor(private taskService: TaskService) {}
@@ -20,18 +19,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     );
     this.taskService.fetch().subscribe((tasks) => {
       if (!tasks) return;
-      Object.values(tasks).map((key) => {
-        this.tasks.push(
-          new Task(
-            key.title,
-            key.description,
-            key.date,
-            key.category,
-            key.isImportant,
-            key.isDone
-          )
-        );
-      });
+      this.tasks = Object.entries(tasks);
     });
   }
   ngOnDestroy(): void {

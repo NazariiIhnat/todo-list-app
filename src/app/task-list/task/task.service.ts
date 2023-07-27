@@ -7,13 +7,13 @@ import { Subject } from 'rxjs';
 export class TaskService {
   private apiUrl =
     'https://todo-list-app-58503-default-rtdb.europe-west1.firebasedatabase.app/task/';
-  newTaskSubject = new Subject<Task>();
+  newTaskSubject = new Subject<[string, Task]>();
 
   constructor(private http: HttpClient) {}
 
   save(task: Task) {
     this.http
-      .post<Task>(this.apiUrl, {
+      .post<{ name: string }>(this.apiUrl, {
         title: task.title,
         description: task.description,
         date: task.date,
@@ -21,9 +21,9 @@ export class TaskService {
         isImportant: task.isImportant,
         isDone: task.isDone,
       })
-      .subscribe((x) => {
-        this.newTaskSubject.next(task);
-      });
+      .subscribe((val) =>
+        this.newTaskSubject.next([val.name.toString(), task])
+      );
   }
 
   fetch() {

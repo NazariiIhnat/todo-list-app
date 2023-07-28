@@ -10,13 +10,13 @@ import { TaskService } from './task.service';
 export class TaskComponent {
   @Input() task: Task;
   @Input() id: string;
-  @Output() taskIdToBeRemovedEmitter = new EventEmitter();
+  @Output() deleteTaskEmitter = new EventEmitter();
 
   constructor(private taskService: TaskService) {}
 
-  onDelete(id: string) {
+  onDelete() {
     this.taskService
-      .delete(id)
-      .subscribe(() => this.taskIdToBeRemovedEmitter.next(id));
+      .delete(this.id)
+      .subscribe(() => this.deleteTaskEmitter.next(this.id));
   }
 }

@@ -47,7 +47,18 @@ export class TaskService implements OnDestroy {
     );
   }
 
-  delete(taskID: string) {
-    return this.http.delete(this.apiUrl + this.userId + '/' + taskID + '.json');
+  delete(taskId: string) {
+    return this.http.delete(this.apiUrl + this.userId + '/' + taskId + '.json');
+  }
+
+  update(taskId: string, task: Task) {
+    return this.http.put(this.apiUrl + this.userId + '/' + taskId + '.json', {
+      title: task.title,
+      description: task.description,
+      date: task.date,
+      category: task.category,
+      isImportant: task.isImportant,
+      isDone: task.isDone,
+    });
   }
 }

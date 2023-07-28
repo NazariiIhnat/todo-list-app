@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class TaskService implements OnDestroy {
   private apiUrl =
     'https://todo-list-app-58503-default-rtdb.europe-west1.firebasedatabase.app/task/';
+  private url: string;
   newTaskSubject = new Subject<[string, Task]>();
   userSubscription = new Subscription();
 
@@ -17,7 +18,7 @@ export class TaskService implements OnDestroy {
 
   init(): void {
     this.userSubscription = this.authService.user.subscribe((user) => {
-      this.apiUrl += user.id + '.json';
+      this.url = this.apiUrl + user?.id + '.json';
     });
   }
 
@@ -27,7 +28,7 @@ export class TaskService implements OnDestroy {
 
   save(task: Task) {
     this.http
-      .post<{ name: string }>(this.apiUrl, {
+      .post<{ name: string }>(this.url, {
         title: task.title,
         description: task.description,
         date: task.date,
@@ -41,6 +42,6 @@ export class TaskService implements OnDestroy {
   }
 
   fetch() {
-    return this.http.get<{ string: { task: Task } }>(this.apiUrl);
+    return this.http.get<{ string: { task: Task } }>(this.url);
   }
 }

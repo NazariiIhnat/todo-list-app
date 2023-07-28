@@ -10,16 +10,17 @@ export class CategoryService implements OnDestroy {
   private userSubscription = new Subscription();
   private apiUrl =
     'https://todo-list-app-58503-default-rtdb.europe-west1.firebasedatabase.app/categories/';
+  private url: string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.init();
   }
 
   init(): void {
-    this.userSubscription = this.authService.user.subscribe((user) => {
-      console.log('123');
+    console.log(this.apiUrl);
 
-      this.apiUrl += user.id + '.json';
+    this.userSubscription = this.authService.user.subscribe((user) => {
+      this.url = this.apiUrl + user?.id + '.json';
     });
   }
   ngOnDestroy(): void {
@@ -28,7 +29,7 @@ export class CategoryService implements OnDestroy {
 
   save(category: Category) {
     this.http
-      .post(this.apiUrl, {
+      .post(this.url, {
         name: category.name,
       })
       .subscribe();
@@ -36,6 +37,6 @@ export class CategoryService implements OnDestroy {
   }
 
   fetch() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.url);
   }
 }

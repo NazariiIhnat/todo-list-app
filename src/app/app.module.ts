@@ -13,7 +13,6 @@ import { HeadersComponent } from './headers/headers.component';
 import { ModalComponent } from './modal/modal.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthInterceptor } from './auth/auth-interceptor.service';
-import { UserInterceptor } from './auth/user-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -37,11 +36,6 @@ import { UserInterceptor } from './auth/user-interceptor.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: UserInterceptor,
       multi: true,
     },
   ],

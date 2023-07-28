@@ -52,11 +52,13 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
+    console.log(form);
+
     const title = form.controls['title'].value;
     const description = form.controls['description'].value;
     const date = form.controls['date'].value;
     const category = form.controls['category'].value;
-    const isImportant = form.controls['important'].value;
+    const isImportant = form.controls['important'].value ? true : false;
     const task = new Task(
       title,
       description,

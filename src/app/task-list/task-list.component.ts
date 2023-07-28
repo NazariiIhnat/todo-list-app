@@ -25,4 +25,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sunscription.unsubscribe();
   }
+
+  handleRemoveTask(id: string) {
+    this.tasks = this.tasks.filter((el) => el[0] !== id);
+  }
 }

@@ -1,7 +1,11 @@
 <div class="container">
   <ul>
     <li *ngFor="let task of tasks">
-      <app-task [id]="task[0]" [task]="task[1]"></app-task>
+      <app-task
+        [id]="task[0]"
+        [task]="task[1]"
+        (taskIdToBeRemovedEmitter)="(handleRemoveTask($event))"
+      ></app-task>
     </li>
   </ul>
 </div>

@@ -46,4 +46,8 @@ export class TaskService implements OnDestroy {
       this.apiUrl + this.userId + '.json'
     );
   }
+
+  delete(taskID: string) {
+    return this.http.delete(this.apiUrl + this.userId + '/' + taskID + '.json');
+  }
 }

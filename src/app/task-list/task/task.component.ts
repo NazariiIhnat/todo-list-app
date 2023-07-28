@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from './task.model';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-task',
@@ -9,4 +10,13 @@ import { Task } from './task.model';
 export class TaskComponent {
   @Input() task: Task;
   @Input() id: string;
+  @Output() taskIdToBeRemovedEmitter = new EventEmitter();
+
+  constructor(private taskService: TaskService) {}
+
+  onDelete(id: string) {
+    this.taskService
+      .delete(id)
+      .subscribe(() => this.taskIdToBeRemovedEmitter.next(id));
+  }
 }

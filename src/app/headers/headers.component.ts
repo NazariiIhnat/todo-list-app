@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { ModalService } from '../modal/modal.service';
 
 @Component({
   selector: 'app-headers',
@@ -7,15 +8,16 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./headers.component.css'],
 })
 export class HeadersComponent {
-  constructor(private authService: AuthService) {}
-
-  @Output() openModalEmitter = new EventEmitter<any>();
+  constructor(
+    private authService: AuthService,
+    private modalService: ModalService
+  ) {}
 
   onLogout() {
     this.authService.logout();
   }
 
   onOpenModal() {
-    this.openModalEmitter.emit();
+    this.modalService.openModal();
   }
 }

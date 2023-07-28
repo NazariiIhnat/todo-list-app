@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { TaskService } from '../task-list/task/task.service';
 import { Task } from '../task-list/task/task.model';
+import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -18,42 +19,49 @@ import { Task } from '../task-list/task/task.model';
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent implements OnInit, OnDestroy {
-  subscription = new Subscription();
+  categorySubscription = new Subscription();
+  modalSubscription = new Subscription();
   categoryItems: { name: string }[] = [];
-  @Output() closeModalEmitter = new EventEmitter<void>();
+  isOpenModal: boolean;
 
   constructor(
     private categoryService: CategoryService,
+    private modalService: ModalService,
     private taskService: TaskService
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.categoryService.fetch().subscribe((val) => {
-      if (!val) return;
-      Object.values(val).map((key) => {
-        this.categoryItems.push({ name: key.name });
+    this.categorySubscription = this.categoryService
+      .fetch()
+      .subscribe((val) => {
+        if (!val) return;
+        Object.values(val).map((key) => {
+          this.categoryItems.push({ name: key.name });
+        });
       });
-    });
+
+    this.modalSubscription = this.modalService.isOpenModal$.subscribe(
+      (isOpen) => (this.isOpenModal = isOpen)
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.categorySubscription.unsubscribe();
+    this.modalSubscription.unsubscribe();
   }
 
   @HostListener('document:keydown.escape', ['$event'])
   closeModalByEscKey(event: KeyboardEvent): void {
-    this.closeModalEmitter.next();
+    this.modalService.closeModal();
   }
 
   @HostListener('document:click', ['$event.target'])
   closeModalByClickOutsideForm(element: HTMLElement): void {
     if (element.classList.contains('modal-container'))
-      this.closeModalEmitter.next();
+      this.modalService.closeModal();
   }
 
   onSubmit(form: NgForm) {
-    console.log(form);
-
     const title = form.controls['title'].value;
     const description = form.controls['description'].value;
     const date = form.controls['date'].value;
@@ -68,6 +76,6 @@ export class ModalComponent implements OnInit, OnDestroy {
       false
     );
     this.taskService.save(task);
-    this.closeModalEmitter.next();
+    this.modalService.closeModal();
   }
 }

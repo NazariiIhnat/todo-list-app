@@ -11,6 +11,7 @@ export class TaskComponent {
   @Input() task: Task;
   @Input() id: string;
   @Output() deleteTaskEmitter = new EventEmitter();
+  @Output() editTaskEmitter = new EventEmitter();
 
   constructor(private taskService: TaskService) {}
 
@@ -28,5 +29,9 @@ export class TaskComponent {
   onChangeStatus() {
     this.task.isDone = !this.task.isDone;
     this.taskService.update(this.id, this.task).subscribe();
+  }
+
+  onEdit() {
+    this.editTaskEmitter.emit(this.id);
   }
 }

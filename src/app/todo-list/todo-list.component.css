@@ -17,7 +17,7 @@ main {
   overflow-y: scroll;
 }
 
-.modal-container {
+/* app-modal {
   position: absolute;
   z-index: 2;
   width: 100%;
@@ -26,4 +26,4 @@ main {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(3px);
-}
+} */

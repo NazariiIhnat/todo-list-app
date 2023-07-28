@@ -35,6 +35,7 @@
           stroke="currentColor"
           class="icon icon-important"
           [ngClass]="{ 'icon-fill': task.isImportant }"
+          (click)="onChangeImportance()"
         >
           <path
             stroke-linecap="round"

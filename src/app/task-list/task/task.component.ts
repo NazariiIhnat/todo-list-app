@@ -19,4 +19,9 @@ export class TaskComponent {
       .delete(this.id)
       .subscribe(() => this.deleteTaskEmitter.next(this.id));
   }
+
+  onChangeImportance() {
+    this.task.isImportant = !this.task.isImportant;
+    this.taskService.update(this.id, this.task).subscribe();
+  }
 }

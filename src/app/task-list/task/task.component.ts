@@ -24,4 +24,9 @@ export class TaskComponent {
     this.task.isImportant = !this.task.isImportant;
     this.taskService.update(this.id, this.task).subscribe();
   }
+
+  onChangeStatus() {
+    this.task.isDone = !this.task.isDone;
+    this.taskService.update(this.id, this.task).subscribe();
+  }
 }

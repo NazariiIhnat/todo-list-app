@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Task } from '../task-list/task/task.model';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
-  private isOpenModalSubject = new Subject<boolean>();
-  isOpenModal$ = this.isOpenModalSubject.asObservable();
+  isOpenModalSubject$ = new Subject<boolean>();
+  isEditModeSubject$ = new Subject<boolean>();
+  editTaskSubject = new Subject<[id: string, task: Task]>();
 
   openModal() {
-    this.isOpenModalSubject.next(true);
+    this.isOpenModalSubject$.next(true);
   }
 
   closeModal() {
-    this.isOpenModalSubject.next(false);
+    this.isOpenModalSubject$.next(false);
+  }
+
+  setEditeMode(val: boolean) {
+    this.isEditModeSubject$.next(val);
+  }
+
+  setEditTask(id: string, task: Task) {
+    this.editTaskSubject.next([id, task])
   }
 }

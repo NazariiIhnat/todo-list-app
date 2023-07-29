@@ -21,8 +21,13 @@ import { ModalService } from './modal.service';
 export class ModalComponent implements OnInit, OnDestroy {
   categorySubscription = new Subscription();
   modalSubscription = new Subscription();
+  editModeSubscription = new Subscription();
+  editTaskSubscription = new Subscription();
   categoryItems: { name: string }[] = [];
   isOpenModal: boolean;
+  isEditMode: boolean;
+  editTaskId: string;
+  editTask: Task;
 
   constructor(
     private categoryService: CategoryService,
@@ -40,14 +45,26 @@ export class ModalComponent implements OnInit, OnDestroy {
         });
       });
 
-    this.modalSubscription = this.modalService.isOpenModal$.subscribe(
+    this.modalSubscription = this.modalService.isOpenModalSubject$.subscribe(
       (isOpen) => (this.isOpenModal = isOpen)
+    );
+
+    this.editModeSubscription = this.modalService.isEditModeSubject$.subscribe(
+      (isEditMode) => (this.isEditMode = isEditMode)
+    );
+    this.editTaskSubscription = this.modalService.editTaskSubject.subscribe(
+      (val) => {
+        this.editTaskId = val[0];
+        this.editTask = val[1];
+      }
     );
   }
 
   ngOnDestroy(): void {
     this.categorySubscription.unsubscribe();
     this.modalSubscription.unsubscribe();
+    this.editModeSubscription.unsubscribe();
+    this.editTaskSubscription.unsubscribe();
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -62,20 +79,23 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    const title = form.controls['title'].value;
-    const description = form.controls['description'].value;
-    const date = form.controls['date'].value;
-    const category = form.controls['category'].value;
-    const isImportant = form.controls['important'].value ? true : false;
-    const task = new Task(
-      title,
-      description,
-      date,
-      category,
-      isImportant,
-      false
-    );
-    this.taskService.save(task);
-    this.modalService.closeModal();
+    if (this.isEditMode) {
+    } else {
+      const title = form.controls['title'].value;
+      const description = form.controls['description'].value;
+      const date = form.controls['date'].value;
+      const category = form.controls['category'].value;
+      const isImportant = form.controls['important'].value ? true : false;
+      const task = new Task(
+        title,
+        description,
+        date,
+        category,
+        isImportant,
+        false
+      );
+      this.taskService.save(task);
+      this.modalService.closeModal();
+    }
   }
 }

@@ -18,6 +18,7 @@ export class HeadersComponent {
   }
 
   onOpenModal() {
+    this.modalService.setEditeMode(false);
     this.modalService.openModal();
   }
 }

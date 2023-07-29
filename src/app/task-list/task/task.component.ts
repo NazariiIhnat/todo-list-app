@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from './task.model';
 import { TaskService } from './task.service';
+import { ModalService } from 'src/app/modal/modal.service';
 
 @Component({
   selector: 'app-task',
@@ -11,9 +12,11 @@ export class TaskComponent {
   @Input() task: Task;
   @Input() id: string;
   @Output() deleteTaskEmitter = new EventEmitter();
-  @Output() editTaskEmitter = new EventEmitter();
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private modalService: ModalService
+  ) {}
 
   onDelete() {
     this.taskService
@@ -32,6 +35,8 @@ export class TaskComponent {
   }
 
   onEdit() {
-    this.editTaskEmitter.emit(this.id);
+    this.modalService.openModal();
+    this.modalService.setEditeMode(true);
+    this.modalService.setEditTask(this.id, this.task);
   }
 }

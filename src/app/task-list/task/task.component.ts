@@ -19,19 +19,17 @@ export class TaskComponent {
   ) {}
 
   onDelete() {
-    this.taskService
-      .delete(this.id)
-      .subscribe(() => this.deleteTaskEmitter.next(this.id));
+    this.taskService.delete(this.id);
   }
 
   onChangeImportance() {
     this.task.isImportant = !this.task.isImportant;
-    this.taskService.update(this.id, this.task).subscribe();
+    this.taskService.update(this.id, this.task);
   }
 
   onChangeStatus() {
     this.task.isDone = !this.task.isDone;
-    this.taskService.update(this.id, this.task).subscribe();
+    this.taskService.update(this.id, this.task);
   }
 
   onEdit() {

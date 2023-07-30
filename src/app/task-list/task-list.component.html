@@ -1,6 +1,6 @@
 <div class="container">
   <ul>
-    <li *ngFor="let task of tasks">
+    <li *ngFor="let task of renderedTasks">
       <app-task
         [id]="task[0]"
         [task]="task[1]"

@@ -80,22 +80,23 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     if (this.isEditMode) {
+      const newTask = this.getTaskFromModalValues(form);
+      this.taskService.update(this.editTaskId, newTask);
+      this.modalService.closeModal();
     } else {
-      const title = form.controls['title'].value;
-      const description = form.controls['description'].value;
-      const date = form.controls['date'].value;
-      const category = form.controls['category'].value;
-      const isImportant = form.controls['important'].value ? true : false;
-      const task = new Task(
-        title,
-        description,
-        date,
-        category,
-        isImportant,
-        false
-      );
+      const task = this.getTaskFromModalValues(form);
       this.taskService.save(task);
       this.modalService.closeModal();
     }
+  }
+
+  private getTaskFromModalValues(form: NgForm) {
+    const isDone = this.isEditMode ? this.editTask.isDone : false;
+    const title = form.controls['title'].value;
+    const description = form.controls['description'].value;
+    const date = form.controls['date'].value;
+    const category = form.controls['category'].value;
+    const isImportant = form.controls['important'].value ? true : false;
+    return new Task(title, description, date, category, isImportant, isDone);
   }
 }

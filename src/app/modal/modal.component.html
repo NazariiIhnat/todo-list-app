@@ -25,7 +25,11 @@
       id="date"
     />
     <label for="category">Category</label>
-    <select id="category" [ngModel]="editTask.category" name="category">
+    <select
+      id="category"
+      [ngModel]="isEditMode ? editTask.category : null"
+      name="category"
+    >
       <option
         *ngFor="let category of categoryItems"
         value="{{ category.name }}"
@@ -42,6 +46,8 @@
         name="important"
       />
     </div>
-    <button [disabled]="form.invalid" type="submit">Add task</button>
+    <button [disabled]="form.invalid" type="submit">
+      {{ isEditMode ? "Save" : "Add task" }}
+    </button>
   </form>
 </div>

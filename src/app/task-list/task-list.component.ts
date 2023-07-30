@@ -8,25 +8,22 @@ import { TaskService } from './task/task.service';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  tasks = [];
+  renderedTasks = [];
   private sunscription = new Subscription();
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.sunscription = this.taskService.newTaskSubject.subscribe((task) =>
-      this.tasks.push(task)
+    this.sunscription = this.taskService.tasksSubject.subscribe(
+      (tasks) => (this.renderedTasks = tasks)
     );
-    this.taskService.fetch().subscribe((tasks) => {
-      if (!tasks) return;
-      this.tasks = Object.entries(tasks);
-    });
+    this.taskService.fetch();
   }
   ngOnDestroy(): void {
     this.sunscription.unsubscribe();
   }
 
   deleteTask(id: string) {
-    this.tasks = this.tasks.filter((el) => el[0] !== id);
+    this.renderedTasks = this.renderedTasks.filter((el) => el[0] !== id);
   }
 }

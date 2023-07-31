@@ -1,7 +1,7 @@
 <div class="container">
-  <ul class="category-list">
+  <ul class="category-list default-category-list">
     <li
-      *ngFor="let item of categoryItems"
+      *ngFor="let item of categories"
       (click)="onSelection(item)"
       [ngClass]="{ selected: item.isSelected }"
     >
@@ -15,7 +15,7 @@
     >+ New</a
   >
   <div class="new-category-container" *ngIf="isShownNewCategoryContainer">
-    <form #form="ngForm" (submit)="onAddCategory(form)">
+    <form #form="ngForm">
       <div class="input-container">
         <input
           type="text"

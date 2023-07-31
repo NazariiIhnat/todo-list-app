@@ -6,7 +6,9 @@ import { Subject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService implements OnDestroy {
-  newCategory = new Subject<Category>();
+  private defaultCategoriesNames = ['All', 'Today', 'Important'];
+  userCategories = [];
+  categoriesSubject = new Subject<any[]>();
   private userSubscription = new Subscription();
   private apiUrl =
     'https://todo-list-app-58503-default-rtdb.europe-west1.firebasedatabase.app/categories/';
@@ -21,6 +23,13 @@ export class CategoryService implements OnDestroy {
       this.userID = user?.id;
     });
   }
+
+  private getDefaultCategories() {
+    return this.defaultCategoriesNames.map((name) => {
+      return { name: name, isSelected: false };
+    });
+  }
+
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
   }
@@ -30,11 +39,31 @@ export class CategoryService implements OnDestroy {
       .post(this.apiUrl + this.userID + '.json', {
         name: category.name,
       })
-      .subscribe();
-    this.newCategory.next(category);
+      .subscribe((id) => {
+        this.userCategories.push({
+          id,
+          name: category.name,
+          isSelected: false,
+        });
+      });
+    this.categoriesSubject.next(this.userCategories);
   }
 
   fetch() {
-    return this.http.get(this.apiUrl + this.userID + '.json');
+    this.userCategories = [...this.getDefaultCategories()];
+    this.http.get(this.apiUrl + this.userID + '.json').subscribe((val) => {
+      if (!val) return;
+      const categories = [
+        ...Object.entries(val).map((key) => {
+          return {
+            id: key[0],
+            name: key[1].name,
+            isSelected: false,
+          };
+        }),
+      ];
+      categories.forEach((category) => this.userCategories.push(category));
+      this.categoriesSubject.next(this.userCategories);
+    });
   }
 }

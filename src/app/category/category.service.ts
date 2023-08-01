@@ -52,17 +52,18 @@ export class CategoryService implements OnDestroy {
   fetch() {
     this.userCategories = [...this.getDefaultCategories()];
     this.http.get(this.apiUrl + this.userID + '.json').subscribe((val) => {
-      if (!val) return;
-      const categories = [
-        ...Object.entries(val).map((key) => {
-          return {
-            id: key[0],
-            name: key[1].name,
-            isSelected: false,
-          };
-        }),
-      ];
-      categories.forEach((category) => this.userCategories.push(category));
+      if (val) {
+        const categories = [
+          ...Object.entries(val).map((key) => {
+            return {
+              id: key[0],
+              name: key[1].name,
+              isSelected: false,
+            };
+          }),
+        ];
+        categories.forEach((category) => this.userCategories.push(category));
+      }
       this.categoriesSubject.next(this.userCategories);
     });
   }

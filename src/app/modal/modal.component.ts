@@ -36,14 +36,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.categorySubscription = this.categoryService
-      .fetch()
-      .subscribe((val) => {
-        if (!val) return;
-        Object.values(val).map((key) => {
-          this.categoryItems.push({ name: key.name });
-        });
-      });
+    this.categorySubscription =
+      this.categoryService.categoriesSubject.subscribe(
+        (val) => (this.categoryItems = val)
+      );
 
     this.modalSubscription = this.modalService.isOpenModalSubject$.subscribe(
       (isOpen) => (this.isOpenModal = isOpen)

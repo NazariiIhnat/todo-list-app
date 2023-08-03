@@ -6,8 +6,15 @@ import { Subject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService implements OnDestroy {
-  private defaultCategoriesNames = ['All', 'Today', 'Important'];
-  userCategories = [];
+  private defaultCategoriesNames = [
+    'All',
+    'Today',
+    'Important',
+    'Unimportant',
+    'Completed',
+    'Uncompleted',
+  ];
+  categories = [];
   categoriesSubject = new Subject<any[]>();
   private userSubscription = new Subscription();
   private apiUrl =
@@ -24,12 +31,6 @@ export class CategoryService implements OnDestroy {
     });
   }
 
-  private getDefaultCategories() {
-    return this.defaultCategoriesNames.map((name) => {
-      return { name: name, isSelected: false };
-    });
-  }
-
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
   }
@@ -40,17 +41,17 @@ export class CategoryService implements OnDestroy {
         name: category.name,
       })
       .subscribe((id) => {
-        this.userCategories.push({
+        this.categories.push({
           id,
           name: category.name,
           isSelected: false,
         });
       });
-    this.categoriesSubject.next(this.userCategories);
+    this.categoriesSubject.next(this.categories);
   }
 
   fetch() {
-    this.userCategories = [...this.getDefaultCategories()];
+    this.categories = [...this.getDefaultCategories()];
     this.http.get(this.apiUrl + this.userID + '.json').subscribe((val) => {
       if (val) {
         const categories = [
@@ -62,9 +63,15 @@ export class CategoryService implements OnDestroy {
             };
           }),
         ];
-        categories.forEach((category) => this.userCategories.push(category));
+        categories.forEach((category) => this.categories.push(category));
       }
-      this.categoriesSubject.next(this.userCategories);
+      this.categoriesSubject.next(this.categories);
+    });
+  }
+
+  private getDefaultCategories() {
+    return this.defaultCategoriesNames.map((name) => {
+      return { name: name, isSelected: false };
     });
   }
 }

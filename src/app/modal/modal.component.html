@@ -31,7 +31,7 @@
       name="category"
     >
       <option
-        *ngFor="let category of categoryItems"
+        *ngFor="let category of categoryItems.slice(6, categoryItems.length)"
         value="{{ category.name }}"
       >
         {{ category.name }}

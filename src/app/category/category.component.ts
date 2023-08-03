@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { CategoryService } from './category.service';
 import { Category } from './category.model';
 import { Subscription } from 'rxjs';
+import { CategorySelectionService } from './category-selection.service';
 
 @Component({
   selector: 'app-category',
@@ -14,13 +15,16 @@ export class CategoryComponent implements OnInit, OnDestroy {
   categories = [];
   private categorySubscription = new Subscription();
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(
+    private categoryService: CategoryService,
+    private categorySelectionService: CategorySelectionService
+  ) {}
 
   ngOnInit(): void {
     this.categoryService.fetch();
     this.categorySubscription =
       this.categoryService.categoriesSubject.subscribe(() => {
-        this.categories = this.categoryService.userCategories;
+        this.categories = this.categoryService.categories;
         this.categories[0].isSelected = true;
       });
   }
@@ -37,6 +41,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   onSelection(menuItem) {
     this.categories.find((item) => item.isSelected === true).isSelected = false;
     menuItem.isSelected = true;
+    this.categorySelectionService.setSelection(menuItem.name);
   }
 
   onCloseCategoryForm() {

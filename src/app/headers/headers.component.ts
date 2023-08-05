@@ -9,6 +9,7 @@ import { AuthService } from '../auth/auth.service';
 import { ModalService } from '../modal/modal.service';
 import { CategorySelectionService } from '../category/category-selection.service';
 import { Subscription } from 'rxjs';
+import { RenderedTasksQuantityService } from '../task-list/rendered-tasks-quantity.service';
 
 @Component({
   selector: 'app-headers',
@@ -17,12 +18,15 @@ import { Subscription } from 'rxjs';
 })
 export class HeadersComponent implements OnInit, OnDestroy {
   categorySelectionSubscription = new Subscription();
+  renderedTasksQuantitySubscription = new Subscription();
   selectedCategory: string;
+  renderedTasksQuantity: number;
 
   constructor(
     private authService: AuthService,
     private modalService: ModalService,
-    private categorySelectionService: CategorySelectionService
+    private categorySelectionService: CategorySelectionService,
+    private renderedTasksQuantityService: RenderedTasksQuantityService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +34,10 @@ export class HeadersComponent implements OnInit, OnDestroy {
       this.categorySelectionService.selectedCategorySubject.subscribe(
         (val) => (this.selectedCategory = val)
       );
+
+    this.renderedTasksQuantitySubscription = this.renderedTasksQuantityService
+      .getRenderedTasksQuantity()
+      .subscribe((val) => (this.renderedTasksQuantity = val));
   }
 
   ngOnDestroy(): void {

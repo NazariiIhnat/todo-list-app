@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TaskService } from './task/task.service';
 import { CategorySelectionService } from '../category/category-selection.service';
+import { RenderedTasksQuantityService } from './rendered-tasks-quantity.service';
 
 @Component({
   selector: 'app-task-list',
@@ -17,7 +18,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   constructor(
     private taskService: TaskService,
-    private categorySelectionService: CategorySelectionService
+    private categorySelectionService: CategorySelectionService,
+    private renderedTasksQuantityService: RenderedTasksQuantityService
   ) {}
 
   ngOnInit(): void {
@@ -25,12 +27,18 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.subscription = this.taskService.tasksSubject.subscribe((tasks) => {
       this.allUserTaks = tasks;
       this.renderedTasks = this.getFilteredTasksBy(this.selectedCategory);
+      this.renderedTasksQuantityService.setRenderedTasksQuantity(
+        this.renderedTasks.length
+      );
     });
     this.selectedCategorySubscription = this.categorySelectionService
       .getSelection()
       .subscribe((val) => {
         this.selectedCategory = val;
         this.renderedTasks = this.getFilteredTasksBy(val);
+        this.renderedTasksQuantityService.setRenderedTasksQuantity(
+          this.renderedTasks.length
+        );
       });
   }
   ngOnDestroy(): void {

@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { TaskService } from './task/task.service';
 import { CategorySelectionService } from '../category/category-selection.service';
 import { RenderedTasksQuantityService } from './rendered-tasks-quantity.service';
+import { SrotOptionService } from '../headers/sort-option.service';
+import { Task } from './task/task.model';
 
 @Component({
   selector: 'app-task-list',
@@ -15,11 +17,13 @@ export class TaskListComponent implements OnInit, OnDestroy {
   selectedCategory: string = '';
   private subscription = new Subscription();
   private selectedCategorySubscription = new Subscription();
+  private sortOptionSubscription = new Subscription();
 
   constructor(
     private taskService: TaskService,
     private categorySelectionService: CategorySelectionService,
-    private renderedTasksQuantityService: RenderedTasksQuantityService
+    private renderedTasksQuantityService: RenderedTasksQuantityService,
+    private sortOptionService: SrotOptionService
   ) {}
 
   ngOnInit(): void {
@@ -40,10 +44,14 @@ export class TaskListComponent implements OnInit, OnDestroy {
           this.renderedTasks.length
         );
       });
+    this.sortOptionSubscription = this.sortOptionService
+      .getSortOptionObservable()
+      .subscribe((val) => this.sortTasksBy(val));
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.selectedCategorySubscription.unsubscribe();
+    this.sortOptionSubscription.unsubscribe();
   }
 
   deleteTask(id: string) {
@@ -70,5 +78,56 @@ export class TaskListComponent implements OnInit, OnDestroy {
       default:
         return this.allUserTaks.filter((task) => task[1].category === name);
     }
+  }
+
+  private sortTasksBy(name: string) {
+    switch (name) {
+      case 'Alphabetically, A-Z':
+        this.sortTasksByTitleASC();
+        break;
+      case 'Alphabetically, Z-A':
+        this.sortTasksByTitleDESC();
+        break;
+      case 'Completed first':
+        this.sortTasksByCompleteFirst();
+        break;
+      case 'Uncompleted first':
+        this.sortTasksByUncompletedFirst();
+        break;
+      case 'Date, old first':
+        this.sortTasksByDateOldFirst();
+        break;
+      case 'Date, new first':
+        this.sortTasksByDateNewFirst();
+        break;
+    }
+  }
+
+  private sortTasksByTitleASC() {
+    this.renderedTasks.sort((a, b) => a[1].title.localeCompare(b[1].title));
+  }
+
+  private sortTasksByTitleDESC() {
+    this.renderedTasks.sort((a, b) => b[1].title.localeCompare(a[1].title));
+  }
+
+  private sortTasksByCompleteFirst() {
+    this.renderedTasks.sort((a, b) => b[1].isDone - a[1].isDone);
+  }
+
+  private sortTasksByUncompletedFirst() {
+    this.renderedTasks.sort((a, b) => a[1].isDone - b[1].isDone);
+  }
+
+  private sortTasksByDateOldFirst() {
+    this.renderedTasks.sort(
+      (a, b) => new Date(a[1].date).getTime() - new Date(b[1].date).getTime()
+    );
+  }
+
+  private sortTasksByDateNewFirst() {
+    this.renderedTasks.sort(
+      (a, b) => new Date(b[1].date).getTime() - new Date(a[1].date).getTime()
+    );
   }
 }

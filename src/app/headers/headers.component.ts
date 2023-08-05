@@ -10,6 +10,7 @@ import { ModalService } from '../modal/modal.service';
 import { CategorySelectionService } from '../category/category-selection.service';
 import { Subscription } from 'rxjs';
 import { RenderedTasksQuantityService } from '../task-list/rendered-tasks-quantity.service';
+import { SrotOptionService } from './sort-option.service';
 
 @Component({
   selector: 'app-headers',
@@ -19,6 +20,14 @@ import { RenderedTasksQuantityService } from '../task-list/rendered-tasks-quanti
 export class HeadersComponent implements OnInit, OnDestroy {
   categorySelectionSubscription = new Subscription();
   renderedTasksQuantitySubscription = new Subscription();
+  sortOptionsNames = [
+    'Alphabetically, A-Z',
+    'Alphabetically, Z-A',
+    'Completed first',
+    'Uncompleted first',
+    'Date, new first',
+    'Date, old first',
+  ];
   selectedCategory: string;
   renderedTasksQuantity: number;
 
@@ -26,7 +35,8 @@ export class HeadersComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private modalService: ModalService,
     private categorySelectionService: CategorySelectionService,
-    private renderedTasksQuantityService: RenderedTasksQuantityService
+    private renderedTasksQuantityService: RenderedTasksQuantityService,
+    private sortOptionService: SrotOptionService
   ) {}
 
   ngOnInit(): void {
@@ -51,5 +61,9 @@ export class HeadersComponent implements OnInit, OnDestroy {
   onOpenModal() {
     this.modalService.setEditeMode(false);
     this.modalService.openModal();
+  }
+
+  onValueChange(event: any) {
+    this.sortOptionService.setSortOption(event.target.value);
   }
 }

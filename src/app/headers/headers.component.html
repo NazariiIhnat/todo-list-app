@@ -11,12 +11,15 @@
     </h1>
     <div class="bottom-headers">
       <button class="btn-add" (click)="onOpenModal()">Add task</button>
-      <select name="sortSelect" id="sortSelect">
+      <select
+        name="sortSelect"
+        id="sortSelect"
+        (change)="onValueChange($event)"
+      >
         <option disabled selected><span>Sort by:</span></option>
-        <option>Earlier first</option>
-        <option>Later first</option>
-        <option>Completed first</option>
-        <option>Uncompleted first</option>
+        <option *ngFor="let name of sortOptionsNames">
+          {{ name }}
+        </option>
       </select>
     </div>
   </div>

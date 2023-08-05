@@ -5,7 +5,10 @@
       <span class="date">11.03.1994</span>
       <a class="btn-logout" (click)="onLogout()" routerLink="../auth">Logout</a>
     </div>
-    <h1 class="title">All tasks (1)</h1>
+    <h1 class="title">
+      <span class="category">{{ selectedCategory }}</span
+      ><span class="quantity">(1)</span>
+    </h1>
     <div class="bottom-headers">
       <button class="btn-add" (click)="onOpenModal()">Add task</button>
       <select name="sortSelect" id="sortSelect">

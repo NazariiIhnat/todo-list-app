@@ -30,6 +30,7 @@ export class HeadersComponent implements OnInit, OnDestroy {
   ];
   selectedCategory: string;
   renderedTasksQuantity: number;
+  todayDate = new Date().toDateString();
 
   constructor(
     private authService: AuthService,

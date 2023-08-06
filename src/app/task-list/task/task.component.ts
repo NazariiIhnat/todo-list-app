@@ -11,7 +11,6 @@ import { ModalService } from 'src/app/modal/modal.service';
 export class TaskComponent {
   @Input() task: Task;
   @Input() id: string;
-  @Output() deleteTaskEmitter = new EventEmitter();
 
   constructor(
     private taskService: TaskService,

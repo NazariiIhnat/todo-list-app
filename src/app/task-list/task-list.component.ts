@@ -70,10 +70,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.searchResultSubscription.unsubscribe();
   }
 
-  deleteTask(id: string) {
-    this.renderedTasks = this.renderedTasks.filter((el) => el[0] !== id);
-  }
-
   private getFilteredTasksBy(name: string) {
     switch (name) {
       case 'All':

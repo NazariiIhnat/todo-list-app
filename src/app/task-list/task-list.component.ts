@@ -4,7 +4,7 @@ import { TaskService } from './task/task.service';
 import { CategorySelectionService } from '../category/category-selection.service';
 import { RenderedTasksQuantityService } from './rendered-tasks-quantity.service';
 import { SrotOptionService } from '../headers/sort-option.service';
-import { Task } from './task/task.model';
+import { SearchResultService } from '../headers/search-result.service';
 
 @Component({
   selector: 'app-task-list',
@@ -14,30 +14,36 @@ import { Task } from './task/task.model';
 export class TaskListComponent implements OnInit, OnDestroy {
   allUserTaks = [];
   renderedTasks = [];
+  isRenderedSearchResult = false;
   selectedCategory: string = '';
   private subscription = new Subscription();
   private selectedCategorySubscription = new Subscription();
   private sortOptionSubscription = new Subscription();
+  private searchResultSubscription = new Subscription();
 
   constructor(
     private taskService: TaskService,
     private categorySelectionService: CategorySelectionService,
     private renderedTasksQuantityService: RenderedTasksQuantityService,
-    private sortOptionService: SrotOptionService
+    private sortOptionService: SrotOptionService,
+    private searcResultService: SearchResultService
   ) {}
 
   ngOnInit(): void {
     this.taskService.fetch();
     this.subscription = this.taskService.tasksSubject.subscribe((tasks) => {
       this.allUserTaks = tasks;
-      this.renderedTasks = this.getFilteredTasksBy(this.selectedCategory);
-      this.renderedTasksQuantityService.setRenderedTasksQuantity(
-        this.renderedTasks.length
-      );
+      if (!this.isRenderedSearchResult) {
+        this.renderedTasks = this.getFilteredTasksBy(this.selectedCategory);
+        this.renderedTasksQuantityService.setRenderedTasksQuantity(
+          this.renderedTasks.length
+        );
+      }
     });
     this.selectedCategorySubscription = this.categorySelectionService
       .getSelection()
       .subscribe((val) => {
+        this.isRenderedSearchResult = false;
         this.selectedCategory = val;
         this.renderedTasks = this.getFilteredTasksBy(val);
         this.renderedTasksQuantityService.setRenderedTasksQuantity(
@@ -47,11 +53,21 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.sortOptionSubscription = this.sortOptionService
       .getSortOptionObservable()
       .subscribe((val) => this.sortTasksBy(val));
+
+    this.searchResultSubscription = this.searcResultService
+      .getSearchResultSubject()
+      .subscribe((val) => {
+        if (val) {
+          this.isRenderedSearchResult = true;
+          this.renderedTasks = val;
+        }
+      });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.selectedCategorySubscription.unsubscribe();
     this.sortOptionSubscription.unsubscribe();
+    this.searchResultSubscription.unsubscribe();
   }
 
   deleteTask(id: string) {

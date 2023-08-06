@@ -1,16 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { ModalService } from '../modal/modal.service';
 import { CategorySelectionService } from '../category/category-selection.service';
 import { Subscription } from 'rxjs';
 import { RenderedTasksQuantityService } from '../task-list/rendered-tasks-quantity.service';
 import { SrotOptionService } from './sort-option.service';
+import { TaskService } from '../task-list/task/task.service';
+import { SearchResultService } from './search-result.service';
 
 @Component({
   selector: 'app-headers',
@@ -31,13 +27,20 @@ export class HeadersComponent implements OnInit, OnDestroy {
   selectedCategory: string;
   renderedTasksQuantity: number;
   todayDate = new Date().toDateString();
+  inputSearch: string = '';
+  userTasksSubscription = new Subscription();
+  userTasks = [];
+  searchResult = [];
+  isVisibleSearchResults: boolean = false;
 
   constructor(
     private authService: AuthService,
     private modalService: ModalService,
     private categorySelectionService: CategorySelectionService,
     private renderedTasksQuantityService: RenderedTasksQuantityService,
-    private sortOptionService: SrotOptionService
+    private sortOptionService: SrotOptionService,
+    private taskService: TaskService,
+    private searchResultService: SearchResultService
   ) {}
 
   ngOnInit(): void {
@@ -49,22 +52,48 @@ export class HeadersComponent implements OnInit, OnDestroy {
     this.renderedTasksQuantitySubscription = this.renderedTasksQuantityService
       .getRenderedTasksQuantity()
       .subscribe((val) => (this.renderedTasksQuantity = val));
+    this.userTasksSubscription = this.taskService.tasksSubject.subscribe(
+      (tasks) => (this.userTasks = tasks)
+    );
   }
 
   ngOnDestroy(): void {
     this.categorySelectionSubscription.unsubscribe();
+    this.userTasksSubscription.unsubscribe();
   }
 
-  onLogout() {
+  onLogout(): void {
     this.authService.logout();
   }
 
-  onOpenModal() {
+  onOpenModal(): void {
     this.modalService.setEditeMode(false);
     this.modalService.openModal();
   }
 
-  onValueChange(event: any) {
+  onValueChange(event: any): void {
     this.sortOptionService.setSortOption(event.target.value);
+  }
+
+  searchTasks() {
+    this.searchResult = this.userTasks.filter((task) =>
+      task[1].title.includes(this.inputSearch)
+    );
+    this.isVisibleSearchResults = this.inputSearch.trim() !== '';
+  }
+
+  renderSelectedTask(taskId: string) {
+    const task = this.searchResult.find((task) => task[0] === taskId);
+    this.searchResultService.setSearchResult([task]);
+    this.isVisibleSearchResults = false;
+    this.selectedCategory = task[1].title;
+    this.renderedTasksQuantity = 1;
+  }
+
+  renderAllSearchedTasks() {
+    this.searchResultService.setSearchResult(this.searchResult);
+    this.isVisibleSearchResults = false;
+    this.selectedCategory = `All results for "${this.inputSearch}"`;
+    this.renderedTasksQuantity = this.searchResult.length;
   }
 }

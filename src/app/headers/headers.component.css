@@ -8,11 +8,52 @@
   align-items: baseline;
 }
 
+form {
+  max-width: 16rem;
+}
+
 input {
+  max-width: inherit;
   padding: 0.5rem 0.4rem;
   font-weight: 500;
   font-size: 1rem;
   font-family: "Ubuntu", sans-serif;
+}
+
+.search-container {
+  background-color: rgb(163, 163, 163);
+  position: absolute;
+  width: 16rem;
+}
+
+.search-inner-container {
+  padding: 0.7rem;
+}
+
+.tasks-list {
+  margin-bottom: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.tasks-list li {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.tasks-list li:hover {
+  color: #ffdba6;
+}
+
+.all-result-btn {
+  padding: 0.2rem 0.1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Ubuntu", sans-serif;
+  width: 100%;
+  cursor: pointer;
 }
 
 .btn-logout {

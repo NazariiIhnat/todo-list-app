@@ -1,7 +1,40 @@
 <div class="container">
   <div class="inner-container">
     <div class="top-headers">
-      <input type="text" placeholder="Search..." />
+      <form class="serch-form" autocomplete="off">
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="inputSearch"
+          name="search"
+          (ngModelChange)="searchTasks()"
+        />
+
+        <div *ngIf="isVisibleSearchResults" class="search-container">
+          <div class="search-inner-container">
+            <span *ngIf="searchResult.length < 1; else results"
+              >No results for "{{ inputSearch }}"</span
+            >
+            <ng-template #results>
+              <ul class="tasks-list">
+                <li
+                  *ngFor="let task of searchResult"
+                  (click)="renderSelectedTask(task[0])"
+                >
+                  <span>{{ task[1].title }}</span>
+                  <span>{{ task[1].date }}</span>
+                </li>
+              </ul>
+              <button
+                class="btn all-result-btn"
+                (click)="renderAllSearchedTasks()"
+              >
+                See all results ({{ searchResult.length }})
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </form>
       <span class="date">{{ todayDate }}</span>
       <a class="btn-logout" (click)="onLogout()" routerLink="../auth">Logout</a>
     </div>

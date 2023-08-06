@@ -57,10 +57,13 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.searchResultSubscription = this.searcResultService
       .getSearchResultSubject()
       .subscribe((val) => {
-        if (val) {
+        if (val && val.length !== 0) {
           this.isRenderedSearchResult = true;
           this.renderedTasks = val;
         }
+        this.renderedTasksQuantityService.setRenderedTasksQuantity(
+          this.renderedTasks.length
+        );
       });
   }
   ngOnDestroy(): void {

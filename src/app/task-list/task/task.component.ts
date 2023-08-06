@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from './task.model';
 import { TaskService } from './task.service';
 import { ModalService } from 'src/app/modal/modal.service';
+import { SearchResultService } from 'src/app/headers/search-result.service';
 
 @Component({
   selector: 'app-task',
@@ -14,11 +15,13 @@ export class TaskComponent {
 
   constructor(
     private taskService: TaskService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private searchResultService: SearchResultService
   ) {}
 
   onDelete() {
     this.taskService.delete(this.id);
+    this.searchResultService.delete(this.id);
   }
 
   onChangeImportance() {

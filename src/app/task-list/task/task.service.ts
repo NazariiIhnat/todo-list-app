@@ -20,6 +20,7 @@ export class TaskService implements OnDestroy {
   init(): void {
     this.userSubscription = this.authService.user.subscribe((user) => {
       this.userId = user?.id;
+      if (user) this.userTasks = [];
     });
   }
 
@@ -40,6 +41,8 @@ export class TaskService implements OnDestroy {
       .subscribe((val) => {
         this.userTasks.push([val.name.toString(), task]);
         this.tasksSubject.next(this.userTasks);
+
+        console.log(this.userTasks);
       });
   }
 

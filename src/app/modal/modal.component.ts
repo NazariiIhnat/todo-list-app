@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CategoryService } from '../category/category.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';

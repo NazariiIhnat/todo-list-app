@@ -23,7 +23,11 @@
       <span class="date">{{ task.date }}</span>
     </div>
     <div class="actions-container">
-      <button [ngClass]="task.isDone ? 'btn-completed' : 'btn-uncompleted'" (click)="onChangeStatus()">
+      <button
+        [ngClass]="task.isDone ? 'btn-completed' : 'btn-uncompleted'"
+        (click)="onChangeStatus()"
+        class="btn"
+      >
         {{ task.isDone ? "completed" : "uncompleted" }}
       </button>
       <div class="action-icons-container">

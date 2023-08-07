@@ -2,10 +2,18 @@
   <h1>Welcome</h1>
   <form #form="ngForm">
     <div class="input-container">
-      <input type="email" required name="email" placeholder="Emial" ngModel />
+      <input
+        class="input"
+        type="email"
+        required
+        name="email"
+        placeholder="Emial"
+        ngModel
+      />
     </div>
     <div class="input-container">
       <input
+        class="input"
         type="password"
         required
         name="password"
@@ -15,8 +23,8 @@
     </div>
 
     <div class="btn-container">
-      <button class="btn-login" (click)="onLogin(form)">Login</button>
-      <button class="btn-signup" (click)="onSignup(form)">Signup</button>
+      <button class="btn btn-login" (click)="onLogin(form)">Login</button>
+      <button class="btn btn-signup" (click)="onSignup(form)">Signup</button>
     </div>
   </form>
 </div>

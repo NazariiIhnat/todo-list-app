@@ -131,3 +131,19 @@ body {
   margin: 0;
   font-family: "Ubuntu", sans-serif;
 }
+
+.btn {
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Ubuntu", sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.input {
+  padding: 0.5rem 0.4rem;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: "Ubuntu", sans-serif;
+}

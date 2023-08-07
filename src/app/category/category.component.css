@@ -1,8 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-
-  background-color: #e0e0e0;
+  background-color: #dfdfdf;
   height: 100%;
 }
 
@@ -30,7 +29,7 @@ a {
 }
 
 .selected {
-  background-color: #e0e0e0;
+  background-color: #bdbde0;
   border-right: 5px solid #827ffe;
 }
 
@@ -54,14 +53,11 @@ a {
 }
 
 input {
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: "Ubuntu", sans-serif;
   color: #403866;
   display: block;
   background: 0 0;
   border: none;
-  width: 100%;
+  width: 90%;
   padding: 0.6rem 0.6rem;
   color: rgb(56, 55, 55);
 }
@@ -74,20 +70,25 @@ input {
 
 .btn {
   width: 50%;
-  border: none;
   padding: 0.3rem 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
 }
 
 .btn-ok {
   background-color: #8eff97;
 }
 
+.btn-ok:disabled {
+  background-color: #c7ffcc;
+}
+
+.btn-ok:hover {
+  background-color: #59ad60;
+}
+
 .btn-cancel {
   background-color: #ff8282;
 }
 
-.btn:hover {
-  transform: scale(1.1);
+.btn-cancel:hover {
+  background-color: #c43c3c;
 }

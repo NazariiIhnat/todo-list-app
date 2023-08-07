@@ -50,11 +50,16 @@ textarea {
 
 button {
   padding: 0.8rem 0.7rem;
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: "Ubuntu", sans-serif;
-  border: none;
-  cursor: pointer;
+  color: #fff;
   background-color: #827ffe;
   width: 100%;
+}
+
+button:hover {
+  background-color: #403866;
+}
+
+button:disabled {
+  background-color: #a6a5ff;
+  cursor: default;
 }

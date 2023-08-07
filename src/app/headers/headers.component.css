@@ -14,14 +14,10 @@ form {
 
 input {
   max-width: inherit;
-  padding: 0.5rem 0.4rem;
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: "Ubuntu", sans-serif;
 }
 
 .search-container {
-  background-color: rgb(163, 163, 163);
+  background-color: #dfdfdf;
   position: absolute;
   width: 16rem;
 }
@@ -44,26 +40,27 @@ input {
 }
 
 .tasks-list li:hover {
-  color: #ffdba6;
+  color: #827ffe;
 }
 
 .all-result-btn {
-  padding: 0.2rem 0.1rem;
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: "Ubuntu", sans-serif;
+  color: white;
+  padding: 0.4rem 0.1rem;
   width: 100%;
-  cursor: pointer;
+  background-color: #827ffe;
+}
+
+.all-result-btn:hover {
+  background-color: #403386;
 }
 
 .btn-logout {
   padding: 0.7rem 0.6rem;
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: "Ubuntu", sans-serif;
-  border: none;
-  cursor: pointer;
   background-color: #ff8282;
+}
+
+.btn-logout:hover {
+  background-color: #c43c3c;
 }
 
 .btn-logout:link,
@@ -86,18 +83,18 @@ input {
 }
 
 .btn-add {
+  color: #fff;
   padding: 0.8rem 0.7rem;
-  font-weight: 500;
-  font-size: 1rem;
-  font-family: "Ubuntu", sans-serif;
-  border: none;
-  cursor: pointer;
   background-color: #827ffe;
+}
+
+.btn-add:hover {
+  background-color: #403866;
 }
 
 select {
   font-size: 1rem;
-  padding: 0.8rem 0.7rem;
+  padding: 0.5rem 0.4rem;
   font-family: "Ubuntu", sans-serif;
   cursor: pointer;
 }

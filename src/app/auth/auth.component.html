@@ -27,4 +27,7 @@
       <button class="btn btn-signup" (click)="onSignup(form)">Signup</button>
     </div>
   </form>
+  <div class="message">
+    <label [class]="isErrorMessage ? 'red' : 'green'">{{ message }}</label>
+  </div>
 </div>

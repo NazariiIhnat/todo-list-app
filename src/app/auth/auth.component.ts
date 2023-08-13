@@ -10,17 +10,22 @@ import { Router } from '@angular/router';
 export class AuthComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
-  errorMessage: string;
+  message: string;
+  isErrorMessage: boolean = false;
 
   onLogin(form: NgForm) {
     const email = form.controls['email'].value;
     const password = form.controls['password'].value;
     this.authService.login(email, password).subscribe(
       (res) => {
-        this.errorMessage = null;
+        this.message = null;
         this, this.router.navigate(['task']);
+        this.isErrorMessage = false;
       },
-      (error) => (this.errorMessage = error.message)
+      (error) => {
+        this.message = error.message;
+        this.isErrorMessage = true;
+      }
     );
     form.reset();
   }
@@ -29,10 +34,12 @@ export class AuthComponent {
     const password = form.controls['password'].value;
     this.authService.signup(email, password).subscribe(
       (res) => {
-        this.errorMessage = null;
+        this.message = `User ${res.email} created`;
+        this.isErrorMessage = false;
       },
       (error) => {
-        this.errorMessage = error.message;
+        this.message = error.message;
+        this.isErrorMessage = true;
       }
     );
     form.reset();

@@ -61,10 +61,20 @@ button:hover {
   background-color: #403866;
 }
 
-.error-msg {
+.message {
   font-family: "Ubuntu", sans-serif;
-  color: #673030;
-  font-size: 18px;
+  font-size: 1.2rem;
   text-transform: uppercase;
-  margin-top: 16px;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  height: 2.6rem;
+}
+
+.green {
+  color: #8eff97;
+}
+
+.red {
+  color: #ff8282;
 }

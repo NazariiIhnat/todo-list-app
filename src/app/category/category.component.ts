@@ -25,7 +25,10 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.categorySubscription =
       this.categoryService.categoriesSubject.subscribe(() => {
         this.categories = this.categoryService.categories;
-        this.categories[0].isSelected = true;
+        const selectedCategory = this.categories.find(
+          (category) => category.isSelected
+        );
+        if (!selectedCategory) this.categories[0].isSelected = true;
       });
   }
   ngOnDestroy(): void {

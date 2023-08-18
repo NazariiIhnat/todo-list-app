@@ -4,6 +4,7 @@ import { CategoryService } from './category.service';
 import { Category } from './category.model';
 import { Subscription } from 'rxjs';
 import { CategorySelectionService } from './category-selection.service';
+import { SearchResultService } from '../headers/search-result.service';
 
 @Component({
   selector: 'app-category',
@@ -13,11 +14,14 @@ import { CategorySelectionService } from './category-selection.service';
 export class CategoryComponent implements OnInit, OnDestroy {
   isShownNewCategoryContainer = false;
   categories = [];
+  private userSearchInputSubscription = new Subscription();
   private categorySubscription = new Subscription();
+  private selectedCategory = null;
 
   constructor(
     private categoryService: CategoryService,
-    private categorySelectionService: CategorySelectionService
+    private categorySelectionService: CategorySelectionService,
+    private searchReaultService: SearchResultService
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +34,16 @@ export class CategoryComponent implements OnInit, OnDestroy {
         );
         if (!selectedCategory) this.categories[0].isSelected = true;
       });
+
+    this.userSearchInputSubscription = this.searchReaultService
+      .getUserSearchInputSubject()
+      .subscribe((input) => {
+        if (input === '') {
+          if (this.selectedCategory) this.onSelection(this.selectedCategory);
+        }
+      });
   }
+
   ngOnDestroy(): void {
     this.categorySubscription.unsubscribe();
   }
@@ -42,6 +55,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   onSelection(menuItem) {
+    this.selectedCategory = menuItem;
     this.categories.find((item) => item.isSelected === true).isSelected = false;
     menuItem.isSelected = true;
     this.categorySelectionService.setSelection(menuItem.name);

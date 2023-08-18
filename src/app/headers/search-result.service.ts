@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class SearchResultService {
   renderedTasks: Task[] = [];
+  userSearchInputSubject = new BehaviorSubject<string>('');
   searchResultSubject = new BehaviorSubject<Task[]>(null);
 
   setSearchResult(tasks: Task[]): void {
@@ -20,5 +21,13 @@ export class SearchResultService {
     const index = this.renderedTasks.findIndex((task) => task[0] === id);
     this.renderedTasks.splice(index, 1);
     this.setSearchResult(this.renderedTasks);
+  }
+
+  updateUserInput(userInput: string) {
+    this.userSearchInputSubject.next(userInput);
+  }
+
+  getUserSearchInputSubject(): Observable<string> {
+    return this.userSearchInputSubject.asObservable();
   }
 }

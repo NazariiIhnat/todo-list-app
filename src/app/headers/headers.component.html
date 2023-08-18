@@ -6,7 +6,7 @@
           class="input"
           type="text"
           placeholder="Search..."
-          [(ngModel)]="inputSearch"
+          [(ngModel)]="userSearchInput"
           name="search"
           (ngModelChange)="searchTasks()"
         />
@@ -14,7 +14,7 @@
         <div *ngIf="isVisibleSearchResults" class="search-container">
           <div class="search-inner-container">
             <span *ngIf="searchResult.length < 1; else results"
-              >No results for "{{ inputSearch }}"</span
+              >No results for "{{ userSearchInput }}"</span
             >
             <ng-template #results>
               <ul class="tasks-list">

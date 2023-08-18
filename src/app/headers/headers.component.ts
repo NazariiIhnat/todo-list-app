@@ -27,7 +27,7 @@ export class HeadersComponent implements OnInit, OnDestroy {
   selectedCategory: string;
   renderedTasksQuantity: number;
   todayDate = new Date().toDateString();
-  inputSearch: string = '';
+  userSearchInput: string = '';
   userTasksSubscription = new Subscription();
   userTasks = [];
   searchResult = [];
@@ -76,10 +76,11 @@ export class HeadersComponent implements OnInit, OnDestroy {
   }
 
   searchTasks() {
+    this.searchResultService.updateUserInput(this.userSearchInput);
     this.searchResult = this.userTasks.filter((task) =>
-      task[1].title.includes(this.inputSearch)
+      task[1].title.includes(this.userSearchInput)
     );
-    this.isVisibleSearchResults = this.inputSearch.trim() !== '';
+    this.isVisibleSearchResults = this.userSearchInput.trim() !== '';
   }
 
   renderSelectedTask(taskId: string) {
@@ -93,7 +94,7 @@ export class HeadersComponent implements OnInit, OnDestroy {
   renderAllSearchedTasks() {
     this.searchResultService.setSearchResult(this.searchResult);
     this.isVisibleSearchResults = false;
-    this.selectedCategory = `All results for "${this.inputSearch}"`;
+    this.selectedCategory = `All results for "${this.userSearchInput}"`;
     this.renderedTasksQuantity = this.searchResult.length;
   }
 }

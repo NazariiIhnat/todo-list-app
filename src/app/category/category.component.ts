@@ -16,7 +16,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   categories = [];
   private userSearchInputSubscription = new Subscription();
   private categorySubscription = new Subscription();
-  private selectedCategory = null;
+  private selectedCategory: { name: string; isSelected: boolean };
 
   constructor(
     private categoryService: CategoryService,
@@ -29,18 +29,19 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.categorySubscription =
       this.categoryService.categoriesSubject.subscribe(() => {
         this.categories = this.categoryService.categories;
-        const selectedCategory = this.categories.find(
+        this.selectedCategory = this.categories.find(
           (category) => category.isSelected
         );
-        if (!selectedCategory) this.categories[0].isSelected = true;
+        if (!this.selectedCategory) {
+          this.categories[0].isSelected = true;
+          this.selectedCategory = this.categories[0];
+        }
       });
 
     this.userSearchInputSubscription = this.searchReaultService
       .getUserSearchInputSubject()
       .subscribe((input) => {
-        if (input === '') {
-          if (this.selectedCategory) this.onSelection(this.selectedCategory);
-        }
+        if (input === '') this.onSelection(this.selectedCategory);
       });
   }
 
@@ -54,11 +55,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.isShownNewCategoryContainer = false;
   }
 
-  onSelection(menuItem) {
-    this.selectedCategory = menuItem;
+  onSelection(selectedCategory: { name: string; isSelected: boolean }) {
+    if (!selectedCategory) return;
+    this.selectedCategory = selectedCategory;
     this.categories.find((item) => item.isSelected === true).isSelected = false;
-    menuItem.isSelected = true;
-    this.categorySelectionService.setSelection(menuItem.name);
+    selectedCategory.isSelected = true;
+    this.categorySelectionService.setSelection(selectedCategory.name);
   }
 
   onCloseCategoryForm() {

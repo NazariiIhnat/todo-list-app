@@ -1,11 +1,14 @@
 <div class="container">
   <ul class="category-list default-category-list">
     <li
-      *ngFor="let item of categories"
-      (click)="onSelection(item)"
-      [ngClass]="{ selected: item.isSelected }"
+      *ngFor="let category of categories"
+      (click)="onSelection(category)"
+      [ngClass]="{ selected: category.isSelected }"
     >
-      <a>{{ item.name }}</a>
+      <a
+        >{{ category.name }}
+        <span>({{ getTasksQuantityOfCategory(category.name) }})</span></a
+      >
     </li>
   </ul>
 

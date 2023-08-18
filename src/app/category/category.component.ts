@@ -5,6 +5,7 @@ import { Category } from './category.model';
 import { Subscription } from 'rxjs';
 import { CategorySelectionService } from './category-selection.service';
 import { SearchResultService } from '../headers/search-result.service';
+import { TaskService } from '../task-list/task/task.service';
 
 @Component({
   selector: 'app-category',
@@ -14,14 +15,17 @@ import { SearchResultService } from '../headers/search-result.service';
 export class CategoryComponent implements OnInit, OnDestroy {
   isShownNewCategoryContainer = false;
   categories = [];
+  categoriesTasksQuantity = [];
   private userSearchInputSubscription = new Subscription();
   private categorySubscription = new Subscription();
+  private tasksSubscription = new Subscription();
   private selectedCategory: { name: string; isSelected: boolean };
 
   constructor(
     private categoryService: CategoryService,
     private categorySelectionService: CategorySelectionService,
-    private searchReaultService: SearchResultService
+    private searchReaultService: SearchResultService,
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {
@@ -43,10 +47,23 @@ export class CategoryComponent implements OnInit, OnDestroy {
       .subscribe((input) => {
         if (input === '') this.onSelection(this.selectedCategory);
       });
+
+    this.tasksSubscription = this.taskService.tasksSubject.subscribe(
+      (tasks) => {
+        this.categoriesTasksQuantity = this.categories.map((category) => {
+          const taskQuantity = this.taskService.getFilteredTasksBy(
+            category.name
+          ).length;
+          return { categoryName: category.name, taskQuantity };
+        });
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.categorySubscription.unsubscribe();
+    this.userSearchInputSubscription.unsubscribe();
+    this.tasksSubscription.unsubscribe();
   }
 
   onSaveCategory(form: NgForm) {
@@ -65,5 +82,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   onCloseCategoryForm() {
     this.isShownNewCategoryContainer = false;
+  }
+
+  getTasksQuantityOfCategory(categoryName: string): number {
+    return this.categoriesTasksQuantity.find(
+      (obj) => obj.categoryName === categoryName
+    )?.taskQuantity;
   }
 }

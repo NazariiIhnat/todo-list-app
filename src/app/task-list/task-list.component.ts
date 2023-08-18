@@ -34,7 +34,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.subscription = this.taskService.tasksSubject.subscribe((tasks) => {
       this.allUserTaks = tasks;
       if (!this.isRenderedSearchResult) {
-        this.renderedTasks = this.getFilteredTasksBy(this.selectedCategory);
+        this.renderedTasks = this.taskService.getFilteredTasksBy(
+          this.selectedCategory
+        );
         this.renderedTasksQuantityService.setRenderedTasksQuantity(
           this.renderedTasks.length
         );
@@ -45,14 +47,16 @@ export class TaskListComponent implements OnInit, OnDestroy {
       .subscribe((val) => {
         this.isRenderedSearchResult = false;
         this.selectedCategory = val;
-        this.renderedTasks = this.getFilteredTasksBy(val);
+        this.renderedTasks = this.taskService.getFilteredTasksBy(val);
         this.renderedTasksQuantityService.setRenderedTasksQuantity(
           this.renderedTasks.length
         );
       });
     this.sortOptionSubscription = this.sortOptionService
       .getSortOptionObservable()
-      .subscribe((val) => this.sortTasksBy(val));
+      .subscribe((val) =>
+        this.taskService.sortTasksBy(val, this.renderedTasks)
+      );
 
     this.searchResultSubscription = this.searcResultService
       .getSearchResultSubject()
@@ -71,78 +75,5 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.selectedCategorySubscription.unsubscribe();
     this.sortOptionSubscription.unsubscribe();
     this.searchResultSubscription.unsubscribe();
-  }
-
-  private getFilteredTasksBy(name: string) {
-    switch (name) {
-      case 'All':
-        return this.allUserTaks;
-      case 'Today':
-        return this.allUserTaks.filter(
-          (task) =>
-            new Date(task[1].date).toDateString() === new Date().toDateString()
-        );
-      case 'Important':
-        return this.allUserTaks.filter((task) => task[1].isImportant);
-      case 'Unimportant':
-        return this.allUserTaks.filter((task) => !task[1].isImportant);
-      case 'Completed':
-        return this.allUserTaks.filter((task) => task[1].isDone);
-      case 'Uncompleted':
-        return this.allUserTaks.filter((task) => !task[1].isDone);
-      default:
-        return this.allUserTaks.filter((task) => task[1].category === name);
-    }
-  }
-
-  private sortTasksBy(name: string) {
-    switch (name) {
-      case 'Alphabetically, A-Z':
-        this.sortTasksByTitleASC();
-        break;
-      case 'Alphabetically, Z-A':
-        this.sortTasksByTitleDESC();
-        break;
-      case 'Completed first':
-        this.sortTasksByCompleteFirst();
-        break;
-      case 'Uncompleted first':
-        this.sortTasksByUncompletedFirst();
-        break;
-      case 'Date, old first':
-        this.sortTasksByDateOldFirst();
-        break;
-      case 'Date, new first':
-        this.sortTasksByDateNewFirst();
-        break;
-    }
-  }
-
-  private sortTasksByTitleASC() {
-    this.renderedTasks.sort((a, b) => a[1].title.localeCompare(b[1].title));
-  }
-
-  private sortTasksByTitleDESC() {
-    this.renderedTasks.sort((a, b) => b[1].title.localeCompare(a[1].title));
-  }
-
-  private sortTasksByCompleteFirst() {
-    this.renderedTasks.sort((a, b) => b[1].isDone - a[1].isDone);
-  }
-
-  private sortTasksByUncompletedFirst() {
-    this.renderedTasks.sort((a, b) => a[1].isDone - b[1].isDone);
-  }
-
-  private sortTasksByDateOldFirst() {
-    this.renderedTasks.sort(
-      (a, b) => new Date(a[1].date).getTime() - new Date(b[1].date).getTime()
-    );
-  }
-
-  private sortTasksByDateNewFirst() {
-    this.renderedTasks.sort(
-      (a, b) => new Date(b[1].date).getTime() - new Date(a[1].date).getTime()
-    );
   }
 }

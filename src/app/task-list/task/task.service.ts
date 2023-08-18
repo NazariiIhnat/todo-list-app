@@ -80,4 +80,77 @@ export class TaskService implements OnDestroy {
         this.tasksSubject.next(this.userTasks);
       });
   }
+
+  getFilteredTasksBy(name: string) {
+    switch (name) {
+      case 'All':
+        return this.userTasks;
+      case 'Today':
+        return this.userTasks.filter(
+          (task) =>
+            new Date(task[1].date).toDateString() === new Date().toDateString()
+        );
+      case 'Important':
+        return this.userTasks.filter((task) => task[1].isImportant);
+      case 'Unimportant':
+        return this.userTasks.filter((task) => !task[1].isImportant);
+      case 'Completed':
+        return this.userTasks.filter((task) => task[1].isDone);
+      case 'Uncompleted':
+        return this.userTasks.filter((task) => !task[1].isDone);
+      default:
+        return this.userTasks.filter((task) => task[1].category === name);
+    }
+  }
+
+  sortTasksBy(name: string, tasks: Task[]) {
+    switch (name) {
+      case 'Alphabetically, A-Z':
+        this.sortTasksByTitleASC(tasks);
+        break;
+      case 'Alphabetically, Z-A':
+        this.sortTasksByTitleDESC(tasks);
+        break;
+      case 'Completed first':
+        this.sortTasksByCompleteFirst(tasks);
+        break;
+      case 'Uncompleted first':
+        this.sortTasksByUncompletedFirst(tasks);
+        break;
+      case 'Date, old first':
+        this.sortTasksByDateOldFirst(tasks);
+        break;
+      case 'Date, new first':
+        this.sortTasksByDateNewFirst(tasks);
+        break;
+    }
+  }
+
+  private sortTasksByTitleASC(tasks: Task[]) {
+    tasks.sort((a, b) => a[1].title.localeCompare(b[1].title));
+  }
+
+  private sortTasksByTitleDESC(tasks: Task[]) {
+    tasks.sort((a, b) => b[1].title.localeCompare(a[1].title));
+  }
+
+  private sortTasksByCompleteFirst(tasks: Task[]) {
+    tasks.sort((a, b) => b[1].isDone - a[1].isDone);
+  }
+
+  private sortTasksByUncompletedFirst(tasks: Task[]) {
+    tasks.sort((a, b) => a[1].isDone - b[1].isDone);
+  }
+
+  private sortTasksByDateOldFirst(tasks: Task[]) {
+    tasks.sort(
+      (a, b) => new Date(a[1].date).getTime() - new Date(b[1].date).getTime()
+    );
+  }
+
+  private sortTasksByDateNewFirst(tasks: Task[]) {
+    tasks.sort(
+      (a, b) => new Date(b[1].date).getTime() - new Date(a[1].date).getTime()
+    );
+  }
 }

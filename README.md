@@ -8,7 +8,7 @@ You can login using email test@gmail.com and password 123123 or signup using you
 
 <h2>Features</h2>
 <ol>
-  <li><span style="font-weight: bold;">User Authentication: The application offers a secure login and signup system,
+  <li><span style="font-weight: bold">User Authentication: The application offers a secure login and signup system,
     ensuring the privacy of user data.
     Input validation is implemented to ensure that only valid data is accepted during the authentication process.</span></li>
   <li><span style="font-weight: bold;">Logout: </span>Users can easily log out from the application with a single click,

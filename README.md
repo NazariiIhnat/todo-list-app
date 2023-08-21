@@ -1,27 +1,35 @@
-# Todo
+<h1>Todo list application README</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
+<h2>Overview</h2>
+This application is designed to help you manage your tasks efficiently. It's built using HTML, CSS, TypeScript, Angular, and Firebase, providing a seamless user experience for managing your tasks.
 
-## Development server
+<h2>Try it</h2>
+https://ihnat-todo.netlify.app/auth. You can login using email test@gmail.com and password 123123 or signup using your own email and password.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<h2>Features</h2>
+<ol>
+  <li><span style="font-weight: bold;">User Authentication: The application offers a secure login and signup system,
+    ensuring the privacy of user data.
+    Input validation is implemented to ensure that only valid data is accepted during the authentication process.</span></li>
+  <li><span style="font-weight: bold;">Logout: </span>Users can easily log out from the application with a single click,
+    ensuring their data's security.</li>
+  <li><span style="font-weight: bold;">Task Creation with Validation: </span>A modal window with a user-friendly form allows
+    for creating new tasks.
+    User input is thoroughly validated to prevent errors and ensure accurate task information.</li>
+  <li><span style="font-weight: bold;">Intuitive Task Display: </span>The application boasts a clean and visually appealing
+    interface for displaying tasks.</li>
+  <li><span style="font-weight: bold;">Task Management: Users have the ability to delete tasks they no longer need.
+    The update feature lets users modify task details according to their changing requirements.
+    Tasks' status can be updated to reflect their progress.
+    Tasks can be marked as important for better prioritization.</span></li>
+  <li><span style="font-weight: bold;">Category Creation: </span>Users can categorize their tasks to keep them organized and
+    easy to locate.</li>
+  <li><span style="font-weight: bold;">Category Filtering: </span>A filtering mechanism is in place to allow users to view
+    tasks based on specific categories.</li>
+  <li><span style="font-weight: bold;">Sorting Options: </span>The application offers a range of sorting options, including:
+    Alphabetical sorting in ascending and descending order.
+    Priority-based sorting, with completed or uncompleted tasks displayed first.
+    Date-based sorting in ascending and descending order.</li>
+  <li><span style="font-weight: bold;">Task Searching: </span>Users can quickly find tasks by searching for keywords in the
+    task title.</li>
+</ol>

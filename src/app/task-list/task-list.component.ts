@@ -72,6 +72,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
           this.renderedTasks.length
         );
       });
+
     this.authSubscription = this.authService.user.subscribe((user) => {
       if (user) this.categorySelectionService.setSelection('All');
     });

@@ -3,8 +3,8 @@
 <h2>Overview</h2>
 This application is designed to help you manage your tasks efficiently. It's built using HTML, CSS, TypeScript, Angular, and Firebase, providing a seamless user experience for managing your tasks.
 
-<h2>Try it</h2>
-https://ihnat-todo.netlify.app/auth. You can login using email test@gmail.com and password 123123 or signup using your own email and password.
+<h2><a href="https://ihnat-todo.netlify.app">Try it</a></h2>
+You can login using email test@gmail.com and password 123123 or signup using your own email and password.
 
 <h2>Features</h2>
 <ol>

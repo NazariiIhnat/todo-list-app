@@ -10,7 +10,7 @@ You can login using email test@gmail.com and password 123123 or signup using you
 <ol>
   <li><b>User Authentication: The application offers a secure login and signup system,
     ensuring the privacy of user data.
-    Input validation is implemented to ensure that only valid data is accepted during the authentication process.<b></li>
+    Input validation is implemented to ensure that only valid data is accepted during the authentication process.</b>b></li>
   <li><span style="font-weight: bold;">Logout: </span>Users can easily log out from the application with a single click,
     ensuring their data's security.</li>
   <li><span style="font-weight: bold;">Task Creation with Validation: </span>A modal window with a user-friendly form allows

@@ -33,3 +33,49 @@ You can login using email test@gmail.com and password 123123 or signup using you
   <li><b>Task Searching: </b>Users can quickly find tasks by searching for keywords in the
     task title.</li>
 </ol>
+
+<h2>Screenshots</h2>
+<ol>
+  <li>
+    Input validation.
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/1.png" alt="Message when user created image">
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/1.1.png" alt="Message when user login fail image">
+  </li>
+  
+  <li>
+    Task add interface.
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/2.png" alt="Task add form image">
+  </li>
+
+  <li>
+    Application interface.
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/3.png" alt="Application interface image">
+  </li>
+
+  <li>
+    Created new categories(Work, Home, Other, Sport).
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/4.png" src="New categories image">
+  </li>
+
+  <li>
+    Add task interface after new categories add.
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/5.png" alt="Add task interface after new categories add image">
+  </li>
+
+  <li>
+    The way categories of each task are displayed in application interface.
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/6.png" alt="Dispay of each task category in application interface image">
+  </li>
+
+  <li>
+    Task sorting.
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/7.png" alt="Task sorting image">
+  </li>
+
+  <li>
+    Task searching
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/8.png">
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/9.png">
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/10.png">
+  </li>
+</ol>

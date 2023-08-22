@@ -79,3 +79,22 @@ You can login using email test@gmail.com and password 123123 or signup using you
     <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/10.png">
   </li>
 </ol>
+
+<h2>Bugs to fix</h2>
+<ul>
+  <li>Fix container, that appears when user input data in search input, to the search input. Now it is scrolling down, when user scroll down.</li>
+</ul>
+
+<h2>Upcoming features</h2>
+<ol>
+  <li>Update/delete categories.</li>
+  <li>Custom color for category font and background.</li>
+  <li>Make categories container x-axis scrollable when category name to long.</li>
+  <li>Make application responsive.</li>
+  <li>Autologin when user refresh page.</li>
+  <li>Autologout after 5 min inaction.</li>
+  <li>Add user name and surname.</li>
+  <li>Ability to create groups and invite users.</li>
+  <li>Send tasks to users in group.</li>
+  <li>Display sent/recived tasks.</li>
+</ol>

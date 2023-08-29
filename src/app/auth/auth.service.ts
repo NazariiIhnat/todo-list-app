@@ -52,9 +52,16 @@ export class AuthService {
       .pipe(
         catchError(this.handleLoginErrors),
         tap((res) => {
-          this.user.next(new User(res.email, res.localId, res.idToken));
-          localStorage.setItem('login_user', JSON.stringify(res));
+          const user = new User(
+            res.email,
+            res.localId,
+            res.idToken,
+            new Date().getTime() + 3600 * 1000
+          );
+          this.user.next(user);
+          localStorage.setItem('login_user', JSON.stringify(user));
           this.isLoggedIn = true;
+          this.autoLogout(user.expiresIn - new Date().getTime());
         })
       );
   }
@@ -105,14 +112,26 @@ export class AuthService {
     this.user.next(null);
     this.isLoggedIn = false;
     localStorage.removeItem('login_user');
+    this.router.navigate(['/auth']);
   }
 
   autoLogin() {
     const data = JSON.parse(localStorage.getItem('login_user'));
-    const user = new User(data.email, data.localId, data.idToken);
+    const user = new User(
+      data.email,
+      data.localId,
+      data.idToken,
+      data.expiresIn
+    );
     this.user.next(user);
     this.router.navigate(['/task']);
     this.isLoggedIn = true;
-    console.log(new Date().getTime());
+    this.autoLogout(user.expiresIn - new Date().getTime());
+  }
+
+  autoLogout(milsLeft: number) {
+    setTimeout(() => {
+      this.logout();
+    }, milsLeft);
   }
 }

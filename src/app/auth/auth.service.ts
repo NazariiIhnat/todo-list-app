@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 export interface AuthData {
   idToken: string;
@@ -19,7 +20,9 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   isLoggedIn = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {
+    if (localStorage.getItem('login_user')) this.autoLogin();
+  }
 
   signup(email: string, password: string) {
     return this.http
@@ -50,6 +53,7 @@ export class AuthService {
         catchError(this.handleLoginErrors),
         tap((res) => {
           this.user.next(new User(res.email, res.localId, res.idToken));
+          localStorage.setItem('login_user', JSON.stringify(res));
           this.isLoggedIn = true;
         })
       );
@@ -100,5 +104,15 @@ export class AuthService {
   logout() {
     this.user.next(null);
     this.isLoggedIn = false;
+    localStorage.removeItem('login_user');
+  }
+
+  autoLogin() {
+    const data = JSON.parse(localStorage.getItem('login_user'));
+    const user = new User(data.email, data.localId, data.idToken);
+    this.user.next(user);
+    this.router.navigate(['/task']);
+    this.isLoggedIn = true;
+    console.log(new Date().getTime());
   }
 }

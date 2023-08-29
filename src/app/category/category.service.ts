@@ -27,7 +27,7 @@ export class CategoryService implements OnDestroy {
 
   init(): void {
     this.userSubscription = this.authService.user.subscribe((user) => {
-      this.userID = user?.id;
+      this.userID = user?.localId;
     });
   }
 

@@ -1,3 +1,7 @@
 export class User {
-  constructor(public emal: string, public id: string, public _token: string) {}
+  constructor(
+    public email: string,
+    public localId: string,
+    public idToken: string
+  ) {}
 }

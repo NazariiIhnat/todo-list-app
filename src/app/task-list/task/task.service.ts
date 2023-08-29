@@ -19,7 +19,7 @@ export class TaskService implements OnDestroy {
 
   init(): void {
     this.userSubscription = this.authService.user.subscribe((user) => {
-      this.userId = user?.id;
+      this.userId = user?.localId;
       if (user) this.userTasks = [];
     });
   }

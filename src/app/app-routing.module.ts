@@ -12,6 +12,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'task', component: TodoListComponent, canActivate: [AuthGuard] },
+  {
+    path: '**',
+    redirectTo: '/auth',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

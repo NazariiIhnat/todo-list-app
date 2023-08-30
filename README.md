@@ -32,7 +32,7 @@ You can login using email test@gmail.com and password 123123 or signup using you
     Date-based sorting in ascending and descending order.</li>
   <li><b>Task Searching: </b>Users can quickly find tasks by searching for keywords in the
     task title.</li>
-  <li><b>Automatic login: </b>The application automatically login if user refresh page. Autologin happens only if used did not logout and last login was less than an hour ago.
+  <li><b>Automatic login: </b>The application automatically login if user refresh page. Autologin happens only if user did not logout and last login was less than an hour ago.
   </li>
   <li><b>Automatic logout:</b> The application automatically logout user after one hour.</li>
 </ol>
@@ -86,7 +86,7 @@ You can login using email test@gmail.com and password 123123 or signup using you
 <h2>Bugs to fix</h2>
 <ul>
   <li>Fix container, that appears when user input data in search input, to the search input. Now it is scrolling down, when user scroll down.</li>
-  <li>When us</li>
+  <li>When user refresh page of application on netlify, the error occuresed.</li>
 </ul>
 
 <h2>Upcoming features</h2>

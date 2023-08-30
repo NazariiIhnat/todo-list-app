@@ -32,6 +32,9 @@ You can login using email test@gmail.com and password 123123 or signup using you
     Date-based sorting in ascending and descending order.</li>
   <li><b>Task Searching: </b>Users can quickly find tasks by searching for keywords in the
     task title.</li>
+  <li><b>Automatic login: </b>The application automatically login if user refresh page. Autologin happens only if used did not logout and last login was less than an hour ago.
+  </li>
+  <li><b>Automatic logout:</b> The application automatically logout user after one hour.</li>
 </ol>
 
 <h2>Screenshots</h2>
@@ -83,6 +86,7 @@ You can login using email test@gmail.com and password 123123 or signup using you
 <h2>Bugs to fix</h2>
 <ul>
   <li>Fix container, that appears when user input data in search input, to the search input. Now it is scrolling down, when user scroll down.</li>
+  <li>When us</li>
 </ul>
 
 <h2>Upcoming features</h2>
@@ -91,8 +95,6 @@ You can login using email test@gmail.com and password 123123 or signup using you
   <li>Custom color for category font and background.</li>
   <li>Make categories container x-axis scrollable when category name to long.</li>
   <li>Make application responsive.</li>
-  <li>Autologin when user refresh page.</li>
-  <li>Autologout after 5 min inaction.</li>
   <li>Add user name and surname.</li>
   <li>Ability to create groups and invite users.</li>
   <li>Send tasks to users in group.</li>

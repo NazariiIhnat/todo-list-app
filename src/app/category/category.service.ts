@@ -3,6 +3,8 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Category } from './category.model';
 import { Subject, Subscription } from 'rxjs';
+import { TaskService } from '../task-list/task/task.service';
+import { CategorySelectionService } from './category-selection.service';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService implements OnDestroy {
@@ -21,7 +23,12 @@ export class CategoryService implements OnDestroy {
     'https://todo-list-app-58503-default-rtdb.europe-west1.firebasedatabase.app/categories/';
   private userID: string;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private taskService: TaskService,
+    private categorySelectionService: CategorySelectionService
+  ) {
     this.init();
   }
 
@@ -42,12 +49,30 @@ export class CategoryService implements OnDestroy {
       })
       .subscribe((id) => {
         this.categories.push({
-          id,
+          id: id['name'],
           name: category.name,
           isSelected: false,
         });
       });
-    this.categoriesSubject.next(this.categories);
+  }
+
+  delete(id: string, deleteRelativeTasks: boolean = false) {
+    const categoryName = this.categories.find(
+      (category) => category.id === id
+    ).name;
+    deleteRelativeTasks
+      ? this.taskService.deleteTasksOfCategory(categoryName)
+      : this.taskService.removeCategoryFromTasks(categoryName);
+    this.http
+      .delete(this.apiUrl + this.userID + '/' + id + '.json')
+      .subscribe(() => {
+        const newCategories = this.categories.filter(
+          (category) => !category.isSelected
+        );
+        this.categories = newCategories;
+        this.categoriesSubject.next(this.categories);
+        this.categorySelectionService.setSelection('All');
+      });
   }
 
   fetch() {

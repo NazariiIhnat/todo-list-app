@@ -1,0 +1,36 @@
+form {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 1.3rem;
+}
+
+.relative-tasks-container {
+  display: flex;
+  align-items: center;
+}
+
+.btns-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn {
+  padding: 0.3rem 0.7rem;
+  transition: all 0.2s;
+}
+
+.btn-no {
+  background-color: #8eff97;
+}
+
+.btn-no:hover {
+  background-color: #59ad60;
+}
+
+.btn-yes {
+  background-color: #ff8282;
+}
+
+.btn-yes:hover {
+  background-color: #c43c3c;
+}

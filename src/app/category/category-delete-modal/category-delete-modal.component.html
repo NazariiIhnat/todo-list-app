@@ -1,0 +1,25 @@
+<div class="modal-container" *ngIf="isVisiable">
+  <form class="modal-form">
+    <h1>Delete category?</h1>
+    <div class="relative-tasks-container">
+      <label for="isConfirmedDeleteRelativeTasks">Delete relative tasks</label>
+      <input
+        type="checkbox"
+        name="isConfirmedDeleteRelativeTasks"
+        id="isConfirmedDeleteRelativeTasks"
+        [(ngModel)]="isConfirmedDeleteRelativeTasks"
+      />
+    </div>
+    <div class="btns-container">
+      <button class="btn btn-no" (click)="closeCategoryDeleteModal()">
+        No
+      </button>
+      <button
+        class="btn btn-yes"
+        (click)="deleteCategory()"
+      >
+        Yes
+      </button>
+    </div>
+  </form>
+</div>

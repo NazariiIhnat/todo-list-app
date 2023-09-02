@@ -13,6 +13,7 @@ import { HeadersComponent } from './headers/headers.component';
 import { TaskAddEditModalComponent } from './task-list/task/task-add-edit-modal/task-add-edit-modal.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthInterceptor } from './auth/auth-interceptor.service';
+import { CategoryDeleteModalComponent } from './category/category-delete-modal/category-delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AuthInterceptor } from './auth/auth-interceptor.service';
     HeadersComponent,
     TaskAddEditModalComponent,
     TodoListComponent,
+    CategoryDeleteModalComponent,
   ],
   imports: [
     BrowserModule,

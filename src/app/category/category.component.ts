@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CategoryService } from './category.service';
 import { Category } from './category.model';
-import { Subscription } from 'rxjs';
+import { Subscription} from 'rxjs';
 import { CategorySelectionService } from './category-selection.service';
 import { SearchResultService } from '../headers/search-result.service';
-import { TaskService } from '../task-list/task/task.service';
+import { CategoryDeleteModalService } from './category-delete-modal/category-delete-modal.service';
 
 @Component({
   selector: 'app-category',
@@ -25,7 +25,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private categorySelectionService: CategorySelectionService,
     private searchReaultService: SearchResultService,
-    private taskService: TaskService
+    private categoryDeleteModalService: CategoryDeleteModalService
   ) {}
 
   ngOnInit(): void {
@@ -47,17 +47,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
       .subscribe((input) => {
         if (input === '') this.onSelection(this.selectedCategory);
       });
-
-    this.tasksSubscription = this.taskService.tasksSubject.subscribe(
-      (tasks) => {
-        this.categoriesTasksQuantity = this.categories.map((category) => {
-          const taskQuantity = this.taskService.getFilteredTasksBy(
-            category.name
-          ).length;
-          return { categoryName: category.name, taskQuantity };
-        });
-      }
-    );
   }
 
   ngOnDestroy(): void {
@@ -88,5 +77,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
     return this.categoriesTasksQuantity.find(
       (obj) => obj.categoryName === categoryName
     )?.taskQuantity;
+  }
+
+  openCategoryDeleteModal(id: string) {
+    this.categoryDeleteModalService.openModal(id);
   }
 }

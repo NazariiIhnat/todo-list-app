@@ -41,8 +41,6 @@ export class TaskService implements OnDestroy {
       .subscribe((val) => {
         this.userTasks.push([val.name.toString(), task]);
         this.tasksSubject.next(this.userTasks);
-
-        console.log(this.userTasks);
       });
   }
 
@@ -79,6 +77,32 @@ export class TaskService implements OnDestroy {
         this.userTasks.find((val) => val[0] === taskId)[1] = task;
         this.tasksSubject.next(this.userTasks);
       });
+  }
+
+  removeCategoryFromTasks(categoryName: string) {
+    const tasksToUpdate = this.userTasks.filter(
+      (task) => task[1].category === categoryName
+    );
+    tasksToUpdate.forEach((task) => {
+      this.update(
+        task[0],
+        new Task(
+          task[1].title,
+          task[1].description,
+          task[1].date,
+          null,
+          task[1].isImportant,
+          task[1].isDone
+        )
+      );
+    });
+  }
+
+  deleteTasksOfCategory(categoryName: string) {
+    const tasksToDelete = this.userTasks.filter(
+      (task) => task[1].category === categoryName
+    );
+    tasksToDelete.forEach((task) => this.delete(task[0]));
   }
 
   getFilteredTasksBy(name: string) {

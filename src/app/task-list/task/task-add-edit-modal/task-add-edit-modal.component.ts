@@ -21,6 +21,7 @@ export class TaskAddEditModalComponent implements OnInit, OnDestroy {
   isEditMode: boolean;
   editTaskId: string;
   editTask: Task;
+  modalCanBeHidden: boolean;
 
   constructor(
     private categoryService: CategoryService,
@@ -61,10 +62,17 @@ export class TaskAddEditModalComponent implements OnInit, OnDestroy {
     this.modalService.closeModal();
   }
 
+  @HostListener('document:mousedown', ['$event.target'])
+  setEnableHideModal(element: HTMLElement): void {
+    element.classList.contains('modal-container')
+      ? (this.modalCanBeHidden = true)
+      : (this.modalCanBeHidden = false);
+  }
+
   @HostListener('document:click', ['$event.target'])
-  closeModalByClickOutsideForm(element: HTMLElement): void {
+  closeModalByClickOutsideOfModal(element: HTMLElement): void {
     if (element.classList.contains('modal-container'))
-      this.modalService.closeModal();
+      if (this.modalCanBeHidden) this.modalService.closeModal();
   }
 
   onSubmit(form: NgForm) {

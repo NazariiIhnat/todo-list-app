@@ -7,11 +7,10 @@
     >
       <a>
         {{ category.name }}
-        <span>({{ getTasksQuantityOfCategory(category.name) }})</span>
       </a>
       <div
         class="category-edit-delete-container"
-        [ngClass]="{ visible: category.isSelected }"
+        [ngClass]="{ visible: category.isSelected && category.id }"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +33,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="icon icon-delete"
+          (click)="openCategoryDeleteModal(category.id)"
         >
           <path
             stroke-linecap="round"

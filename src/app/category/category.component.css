@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  background-color: #dfdfdf;
   height: 100%;
 }
 
@@ -12,20 +11,42 @@ ul {
 
 li {
   cursor: pointer;
-  padding: 1rem 0;
   transition: all 0.2s;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-li:hover {
-  color: #827ffe;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0.5rem 0.6rem 1rem;
 }
 
 a {
   font-weight: 500;
-  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+a:hover {
+  color: #827ffe;
+}
+
+.category-edit-delete-container {
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.icon {
+  width: 1.1rem;
+  transition: all 0.2s;
+}
+
+.icon:hover {
+  transform: scale(1.2);
 }
 
 .selected {
@@ -58,7 +79,6 @@ input {
   background: 0 0;
   border: none;
   width: 90%;
-  padding: 0.6rem 0.6rem;
   color: rgb(56, 55, 55);
 }
 
@@ -71,6 +91,10 @@ input {
 .btn {
   width: 50%;
   padding: 0.3rem 1rem;
+}
+
+.btn-new {
+  padding: 0.6rem 0.5rem 0.6rem 1rem;
 }
 
 .btn-ok {

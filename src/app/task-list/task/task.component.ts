@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from './task.model';
 import { TaskService } from './task.service';
-import { ModalService } from 'src/app/modal/modal.service';
+import { TaskAddEditModalService } from 'src/app/task-list/task/task-add-edit-modal/task-add-edit-modal.service';
 import { SearchResultService } from 'src/app/headers/search-result.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class TaskComponent {
 
   constructor(
     private taskService: TaskService,
-    private modalService: ModalService,
+    private modalService: TaskAddEditModalService,
     private searchResultService: SearchResultService
   ) {}
 

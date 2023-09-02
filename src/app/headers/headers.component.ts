@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { ModalService } from '../modal/modal.service';
+import { TaskAddEditModalService } from '../task-list/task/task-add-edit-modal/task-add-edit-modal.service';
 import { CategorySelectionService } from '../category/category-selection.service';
 import { Subscription } from 'rxjs';
 import { RenderedTasksQuantityService } from '../task-list/rendered-tasks-quantity.service';
@@ -35,7 +35,7 @@ export class HeadersComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private modalService: ModalService,
+    private modalService: TaskAddEditModalService,
     private categorySelectionService: CategorySelectionService,
     private renderedTasksQuantityService: RenderedTasksQuantityService,
     private sortOptionService: SrotOptionService,

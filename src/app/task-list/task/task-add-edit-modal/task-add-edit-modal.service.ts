@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Task } from '../task-list/task/task.model';
+import { Task } from '../task.model';
 
 @Injectable({ providedIn: 'root' })
-export class ModalService {
+export class TaskAddEditModalService {
   isOpenModalSubject$ = new Subject<boolean>();
   isEditModeSubject$ = new Subject<boolean>();
   editTaskSubject = new Subject<[id: string, task: Task]>();
@@ -21,6 +21,6 @@ export class ModalService {
   }
 
   setEditTask(id: string, task: Task) {
-    this.editTaskSubject.next([id, task])
+    this.editTaskSubject.next([id, task]);
   }
 }

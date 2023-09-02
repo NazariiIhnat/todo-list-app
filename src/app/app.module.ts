@@ -10,7 +10,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskComponent } from './task-list/task/task.component';
 import { CategoryComponent } from './category/category.component';
 import { HeadersComponent } from './headers/headers.component';
-import { ModalComponent } from './modal/modal.component';
+import { TaskAddEditModalComponent } from './task-list/task/task-add-edit-modal/task-add-edit-modal.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthInterceptor } from './auth/auth-interceptor.service';
 
@@ -22,7 +22,7 @@ import { AuthInterceptor } from './auth/auth-interceptor.service';
     TaskComponent,
     CategoryComponent,
     HeadersComponent,
-    ModalComponent,
+    TaskAddEditModalComponent,
     TodoListComponent,
   ],
   imports: [

@@ -1,17 +1,17 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { CategoryService } from '../category/category.service';
+import { CategoryService } from '../../../category/category.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
-import { TaskService } from '../task-list/task/task.service';
-import { Task } from '../task-list/task/task.model';
-import { ModalService } from './modal.service';
+import { TaskService } from '../task.service';
+import { Task } from '../task.model';
+import { TaskAddEditModalService } from './task-add-edit-modal.service';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css'],
+  selector: 'app-task-add-edit-modal',
+  templateUrl: './task-add-edit-modal.component.html',
+  styleUrls: ['./task-add-edit-modal.component.css'],
 })
-export class ModalComponent implements OnInit, OnDestroy {
+export class TaskAddEditModalComponent implements OnInit, OnDestroy {
   categorySubscription = new Subscription();
   modalSubscription = new Subscription();
   editModeSubscription = new Subscription();
@@ -24,7 +24,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private categoryService: CategoryService,
-    private modalService: ModalService,
+    private modalService: TaskAddEditModalService,
     private taskService: TaskService
   ) {}
 

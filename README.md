@@ -35,6 +35,8 @@ You can login using email test@gmail.com and password 123123 or signup using you
   <li><b>Automatic login: </b>The application automatically login if user refresh page. Autologin happens only if user did not logout and last login was less than an hour ago.
   </li>
   <li><b>Automatic logout:</b> The application automatically logout user after one hour.</li>
+  <li><b>Category edit:</b> User can edit category name and application automatically change name in relative tasks.</li>
+  <li><b>Category delete:</b> User can delete category with two options. The first optin allow user to delete category only and all relative to this category tasks will have no category. The second option will delete category and relative tasks.</li>
 </ol>
 
 <h2>Screenshots</h2>
@@ -81,6 +83,18 @@ You can login using email test@gmail.com and password 123123 or signup using you
     <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/9.png">
     <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/10.png">
   </li>
+  <li>
+    Buttons of category update and delete apears on selected category. This buttons apears only on user created categories.
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/11.png">
+  </li>
+  <li>
+    Category update dialog
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/12.png">
+  </li>
+  <li>
+    Category delete dialog
+    <img src="https://github.com/NazariiIhnat/todo-list-app/blob/master/screenshots/13.png">
+  </li>
 </ol>
 
 <h2>Bugs to fix</h2>
@@ -91,7 +105,6 @@ You can login using email test@gmail.com and password 123123 or signup using you
 
 <h2>Upcoming features</h2>
 <ol>
-  <li>Update/delete categories.</li>
   <li>Custom color for category font and background.</li>
   <li>Make categories container x-axis scrollable when category name to long.</li>
   <li>Make application responsive.</li>

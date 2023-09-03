@@ -99,8 +99,9 @@ You can login using email test@gmail.com and password 123123 or signup using you
 
 <h2>Bugs to fix</h2>
 <ul>
-  <li>Fix container, that appears when user input data in search input, to the search input. Now it is scrolling down, when user scroll down.</li>
+  <li>Fix container, that appears when user input data in search input. Now it is scrolling down, when user scroll down.</li>
   <li>When user refresh page of application on netlify, the error occuresed.</li>
+  <li>Sort option (if selected) don't work after category rename. User must reselect sort option (different than previously selected).</li>
 </ul>
 
 <h2>Upcoming features</h2>

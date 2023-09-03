@@ -10,7 +10,7 @@ import { CategoryService } from '../category.service';
 })
 export class CategoryDeleteModalComponent implements OnInit, OnDestroy {
   modalVisabilitySubscription$ = new Subscription();
-  isVisiable: boolean = false;
+  isVisible: boolean = false;
   isConfirmedDeleteRelativeTasks: boolean;
   modalCanBeHidden: boolean;
 
@@ -22,7 +22,7 @@ export class CategoryDeleteModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.modalVisabilitySubscription$ =
       this.categoryDeleteModalService.modalVisabilitySubject.subscribe(
-        (isVisiable) => (this.isVisiable = isVisiable)
+        (isVisiable) => (this.isVisible = isVisiable)
       );
   }
 
@@ -49,7 +49,7 @@ export class CategoryDeleteModalComponent implements OnInit, OnDestroy {
   @HostListener('document:mouseup', ['$event.target'])
   closeModalByClickOutsideOfModal(element: HTMLElement): void {
     if (element.classList.contains('modal-container'))
-      if (this.modalCanBeHidden) this.isVisiable = false;
+      if (this.modalCanBeHidden) this.isVisible = false;
   }
 
   deleteCategory() {

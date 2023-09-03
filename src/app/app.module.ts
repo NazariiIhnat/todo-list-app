@@ -14,6 +14,7 @@ import { TaskAddEditModalComponent } from './task-list/task/task-add-edit-modal/
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthInterceptor } from './auth/auth-interceptor.service';
 import { CategoryDeleteModalComponent } from './category/category-delete-modal/category-delete-modal.component';
+import { CategoryAddEditModalComponent } from './category/category-add-edit-modal/category-add-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CategoryDeleteModalComponent } from './category/category-delete-modal/c
     TaskAddEditModalComponent,
     TodoListComponent,
     CategoryDeleteModalComponent,
+    CategoryAddEditModalComponent,
   ],
   imports: [
     BrowserModule,

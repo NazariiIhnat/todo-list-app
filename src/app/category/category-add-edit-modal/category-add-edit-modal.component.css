@@ -1,0 +1,41 @@
+.modal-form {
+  max-width: 16rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.btns-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn {
+  padding: 0.3rem 1.2rem;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+.btn-ok {
+  background-color: #8eff97;
+}
+
+.btn-ok:hover {
+  background-color: #59ad60;
+}
+
+.btn-cancel {
+  background-color: #ff8282;
+}
+
+.btn-cancel:hover {
+  background-color: #c43c3c;
+}

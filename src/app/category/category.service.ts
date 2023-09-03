@@ -62,7 +62,7 @@ export class CategoryService implements OnDestroy {
     ).name;
     deleteRelativeTasks
       ? this.taskService.deleteTasksOfCategory(categoryName)
-      : this.taskService.removeCategoryFromTasks(categoryName);
+      : this.taskService.updateTasksCategory(categoryName, null);
     this.http
       .delete(this.apiUrl + this.userID + '/' + id + '.json')
       .subscribe(() => {
@@ -72,6 +72,21 @@ export class CategoryService implements OnDestroy {
         this.categories = newCategories;
         this.categoriesSubject.next(this.categories);
         this.categorySelectionService.setSelection('All');
+      });
+  }
+
+  update(categoryId: string, newName: string) {
+    this.http
+      .put(this.apiUrl + this.userID + '/' + categoryId + '.json', {
+        name: newName,
+      })
+      .subscribe(() => {
+        const categoryToUpdate = this.categories.find(
+          (category) => category.id === categoryId
+        );
+        this.taskService.updateTasksCategory(categoryToUpdate.name, newName);
+        categoryToUpdate.name = newName;
+        this.categoriesSubject.next(this.categories);
       });
   }
 

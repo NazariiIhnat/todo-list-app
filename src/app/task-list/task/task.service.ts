@@ -79,9 +79,9 @@ export class TaskService implements OnDestroy {
       });
   }
 
-  removeCategoryFromTasks(categoryName: string) {
+  updateTasksCategory(oldCategoryName: string, newCategoryName: string) {
     const tasksToUpdate = this.userTasks.filter(
-      (task) => task[1].category === categoryName
+      (task) => task[1].category === oldCategoryName
     );
     tasksToUpdate.forEach((task) => {
       this.update(
@@ -90,7 +90,7 @@ export class TaskService implements OnDestroy {
           task[1].title,
           task[1].description,
           task[1].date,
-          null,
+          newCategoryName,
           task[1].isImportant,
           task[1].isDone
         )

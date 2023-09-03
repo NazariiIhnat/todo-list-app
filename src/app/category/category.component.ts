@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CategoryService } from './category.service';
 import { Category } from './category.model';
-import { Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CategorySelectionService } from './category-selection.service';
 import { SearchResultService } from '../headers/search-result.service';
 import { CategoryDeleteModalService } from './category-delete-modal/category-delete-modal.service';
+import { CategoryAddEditModalService } from './category-add-edit-modal/category-add-edit.modal.service';
 
 @Component({
   selector: 'app-category',
@@ -24,8 +25,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
   constructor(
     private categoryService: CategoryService,
     private categorySelectionService: CategorySelectionService,
-    private searchReaultService: SearchResultService,
-    private categoryDeleteModalService: CategoryDeleteModalService
+    private searchResultService: SearchResultService,
+    private categoryDeleteModalService: CategoryDeleteModalService,
+    private categoryAddEditModalService: CategoryAddEditModalService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.userSearchInputSubscription = this.searchReaultService
+    this.userSearchInputSubscription = this.searchResultService
       .getUserSearchInputSubject()
       .subscribe((input) => {
         if (input === '') this.onSelection(this.selectedCategory);
@@ -55,12 +57,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.tasksSubscription.unsubscribe();
   }
 
-  onSaveCategory(form: NgForm) {
-    const name = form.controls['categoryName'].value;
-    this.categoryService.save(new Category(name));
-    this.isShownNewCategoryContainer = false;
-  }
-
   onSelection(selectedCategory: { name: string; isSelected: boolean }) {
     if (!selectedCategory) return;
     this.selectedCategory = selectedCategory;
@@ -69,17 +65,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.categorySelectionService.setSelection(selectedCategory.name);
   }
 
-  onCloseCategoryForm() {
-    this.isShownNewCategoryContainer = false;
-  }
-
-  getTasksQuantityOfCategory(categoryName: string): number {
-    return this.categoriesTasksQuantity.find(
-      (obj) => obj.categoryName === categoryName
-    )?.taskQuantity;
-  }
-
   openCategoryDeleteModal(id: string) {
     this.categoryDeleteModalService.openModal(id);
+  }
+
+  onOpenCategoryAddEditModal(category: Category = null) {
+    this.categoryAddEditModalService.openModal(category);
   }
 }

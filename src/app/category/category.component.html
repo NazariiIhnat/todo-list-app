@@ -19,6 +19,7 @@
           stroke-width="1.5"
           stroke="currentColor"
           class="icon icon-edit"
+          (click)="onOpenCategoryAddEditModal(category)"
         >
           <path
             stroke-linecap="round"
@@ -45,40 +46,5 @@
     </li>
   </ul>
 
-  <a
-    class="btn-new"
-    (click)="isShownNewCategoryContainer = !isShownNewCategoryContainer"
-    >+ New</a
-  >
-  <div class="new-category-container" *ngIf="isShownNewCategoryContainer">
-    <form #form="ngForm">
-      <div class="input-container">
-        <input
-          class="input"
-          autocomplete="off"
-          type="text"
-          required
-          [minlength]="1"
-          [maxlength]="20"
-          name="categoryName"
-          ngModel
-        />
-      </div>
-      <div class="btn-container">
-        <button
-          class="btn btn-ok"
-          type="submit"
-          [disabled]="form.invalid"
-          [style.opacity]="form.valid ? 1 : 0.5"
-          [ngStyle]="form.invalid ? { opacity: 0.5, cursor: 'default' } : {}"
-          (click)="onSaveCategory(form)"
-        >
-          &#10004;
-        </button>
-        <button class="btn btn-cancel" (click)="onCloseCategoryForm()">
-          X
-        </button>
-      </div>
-    </form>
-  </div>
+  <a class="btn-new" (click)="onOpenCategoryAddEditModal()">+ New</a>
 </div>

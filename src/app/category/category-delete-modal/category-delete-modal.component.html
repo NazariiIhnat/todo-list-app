@@ -1,4 +1,4 @@
-<div class="modal-container" *ngIf="isVisiable">
+<div class="modal-container" *ngIf="isVisible">
   <form class="modal-form">
     <h1>Delete category?</h1>
     <div class="relative-tasks-container">
@@ -14,12 +14,7 @@
       <button class="btn btn-no" (click)="closeCategoryDeleteModal()">
         No
       </button>
-      <button
-        class="btn btn-yes"
-        (click)="deleteCategory()"
-      >
-        Yes
-      </button>
+      <button class="btn btn-yes" (click)="deleteCategory()">Yes</button>
     </div>
   </form>
 </div>
